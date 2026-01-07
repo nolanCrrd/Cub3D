@@ -3,6 +3,6 @@
 # include "map.h"
 
 t_map	*parse(char *file_path);
-int		check_file(int fd, t_map *map);
+int		check_file(t_map *map);
 
 #endif

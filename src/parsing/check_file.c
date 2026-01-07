@@ -1,23 +1,11 @@
+#include <stddef.h>
+#include <stdlib.h>
+#include <fcntl.h>
 #include "ft_printf.h"
 #include "get_next_line.h"
 #include "libft.h"
 #include "utils.h"
 #include "map.h"
-#include <stddef.h>
-#include <stdlib.h>
-
-static char	*skip_empty_line(int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line && is_blank(line))
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (line);
-}
 
 static int is_valid_texture(char *line, char **already_seen)
 {
@@ -99,14 +87,23 @@ int	check_map(int fd, t_map *map)
 	return (0);
 }
 
-int	check_file(int fd, t_map *map)
+int	check_file(t_map *map)
 {
 	char	**already_seen;
+	int		fd;
 
+	fd = open(map->file_path, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("cub3D");
+		return (1);
+	}
 	already_seen = ft_calloc(7, sizeof(char *));
-	if (check_textures(fd, already_seen))
+	if (check_textures(fd, already_seen) || check_map(fd, map))
+	{
+		close(fd);
 		return (1);
-	if (check_map(fd, map))
-		return (1);
+	}
+	close(fd);
 	return (0);
 }
