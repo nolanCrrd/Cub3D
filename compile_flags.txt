@@ -1,0 +1,6 @@
+-Iinclude/
+-Ilibft/
+-Ilibft/ft_printf/includes/
+-Ilibft/get_next_line/
+-lSDL2
+-lm
