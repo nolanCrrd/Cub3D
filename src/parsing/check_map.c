@@ -4,41 +4,6 @@
 #include "utils.h"
 #include "map.h"
 
-static int	check_walls_textures(int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	if (line == NULL || ft_strncmp(line, "NO ", 3) != 0)
-		return (1);
-	free(line);
-	line = get_next_line(fd);
-	if (line == NULL || ft_strncmp(line, "SO ", 3) != 0)
-		return (1);
-	free(line);
-	line = get_next_line(fd);
-	if (line == NULL || ft_strncmp(line, "WE ", 3) != 0)
-		return (1);
-	free(line);
-	line = get_next_line(fd);
-	if (line == NULL || ft_strncmp(line, "EA ", 3) != 0)
-		return (1);
-	free(line);
-	return (0);
-}
-
-static int	check_other_textures(int fd, char *line)
-{
-	if (line == NULL || ft_strncmp(line, "F ", 2) != 0)
-		return (1);
-	free(line);
-	line = get_next_line(fd);
-	if (line == NULL || ft_strncmp(line, "C ", 2) != 0)
-		return (1);
-	free(line);
-	return (0);
-}
-
 static char	*skip_empty_line(int fd)
 {
 	char	*line;
@@ -52,6 +17,45 @@ static char	*skip_empty_line(int fd)
 	return (line);
 }
 
+static int	check_walls_textures(int fd)
+{
+	char	*line;
+
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "NO ", 3) != 0)
+		return (1);
+	free(line);
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "SO ", 3) != 0)
+		return (1);
+	free(line);
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "WE ", 3) != 0)
+		return (1);
+	free(line);
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "EA ", 3) != 0)
+		return (1);
+	free(line);
+	return (0);
+}
+
+static int	check_other_textures(int fd)
+{
+	char	*line;
+
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "F ", 2) != 0)
+		return (1);
+	free(line);
+	line = skip_empty_line(fd);
+	if (line == NULL || ft_strncmp(line, "C ", 2) != 0)
+		return (1);
+	free(line);
+	return (0);
+}
+
+
 int	check_map(int fd, t_map *map)
 {
 	char	*line;
@@ -61,8 +65,7 @@ int	check_map(int fd, t_map *map)
 	x_max = 0;
 	if (check_walls_textures(fd))
 		return (1);
-	line = skip_empty_line(fd);
-	if (check_other_textures(fd, line))
+	if (check_other_textures(fd))
 		return (1);
 	line = skip_empty_line(fd);
 	while (line)
