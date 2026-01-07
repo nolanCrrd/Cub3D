@@ -2,6 +2,7 @@
 # define PARSING_H
 # include "map.h"
 
-t_map	*get_map(char *file_path);
+t_map	*parse(char *file_path);
+int		check_file(int fd, t_map *map);
 
 #endif

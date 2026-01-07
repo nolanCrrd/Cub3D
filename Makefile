@@ -3,14 +3,18 @@ NAME = cub3D
 SRC_DIR = src/
 MLX_DIR = mlx/
 
-SRCS_PARSING = $(SRC_DIR)parsing/check_map.c \
+SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/parser.c \
 
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
+	$(SRC_DIR)utils/remove_spaces.c
 
 SRCS = $(SRC_DIR)cub3d.c \
+	$(SRCS_UTILS) \
+	$(SRCS_PARSING) \
+	$(SRCS_RENDER)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -61,6 +65,9 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX_DIR)libmlx.so
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)utils
+	@mkdir -p $(OBJ_DIR)parsing
+	@mkdir -p $(OBJ_DIR)render
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
