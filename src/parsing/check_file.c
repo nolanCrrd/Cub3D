@@ -6,6 +6,12 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+/**
+ * @brief Skip all the line int he fd that contain only whitespaces
+ *
+ * @param fd
+ * @return 
+ */
 static char	*skip_empty_line(int fd)
 {
 	char	*line;
@@ -19,6 +25,14 @@ static char	*skip_empty_line(int fd)
 	return (line);
 }
 
+/**
+ * @brief Tell if the line contain a valid texture and if it wasn't already already_seen
+ * and add it to texture already seen
+ *
+ * @param line
+ * @param already_seen 
+ * @return 
+ */
 static int is_valid_texture(char *line, char **already_seen)
 {
 	const char	*valid[] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
@@ -47,6 +61,13 @@ static int is_valid_texture(char *line, char **already_seen)
 	return (0);
 }
 
+/**
+ * @brief Check if the config file contain all the needed textures
+ *
+ * @param fd 
+ * @param already_seen 
+ * @return 
+ */
 static int	check_textures(int fd, char **already_seen)
 {
 	char	*line;
@@ -73,6 +94,14 @@ static int	check_textures(int fd, char **already_seen)
 	return (0);
 }
 
+/**
+ * @brief Check if the file contain a map without empty line in
+ * and it's store the size of the map into the strcut
+ *
+ * @param fd 
+ * @param map 
+ * @return 
+ */
 int	check_map(int fd, t_map *map)
 {
 	char	*line;
