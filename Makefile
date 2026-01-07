@@ -3,6 +3,13 @@ NAME = cub3D
 SRC_DIR = src/
 MLX_DIR = mlx/
 
+SRCS_PARSING = $(SRC_DIR)parsing/check_map.c \
+	$(SRC_DIR)parsing/parser.c \
+
+SRCS_RENDER = $(SRC_DIR)render/renderer.c \
+
+SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
+
 SRCS = $(SRC_DIR)cub3d.c \
 
 OBJ_DIR = .build/
