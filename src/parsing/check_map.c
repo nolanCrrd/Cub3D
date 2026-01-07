@@ -4,7 +4,7 @@
 #include "utils.h"
 #include "map.h"
 
-int	check_walls_textures(int fd)
+static int	check_walls_textures(int fd)
 {
 	char	*line;
 
@@ -27,11 +27,8 @@ int	check_walls_textures(int fd)
 	return (0);
 }
 
-int	check_other_textures(int fd)
+static int	check_other_textures(int fd, char *line)
 {
-	char	*line;
-
-	line = get_next_line(fd);
 	if (line == NULL || ft_strncmp(line, "F ", 2) != 0)
 		return (1);
 	free(line);
@@ -42,7 +39,7 @@ int	check_other_textures(int fd)
 	return (0);
 }
 
-void	skip_empty_line(int fd)
+static char	*skip_empty_line(int fd)
 {
 	char	*line;
 
@@ -52,36 +49,32 @@ void	skip_empty_line(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	return (line);
 }
 
 int	check_map(int fd, t_map *map)
 {
-	char *line;
+	char	*line;
 	int		x_max;
-	int		y_max;
 	int		tmp_x;
 
 	x_max = 0;
-	y_max = 0;
 	if (check_walls_textures(fd))
 		return (1);
-	skip_empty_line(fd);
-	if (check_other_textures(fd))
+	line = skip_empty_line(fd);
+	if (check_other_textures(fd, line))
 		return (1);
-	skip_empty_line(fd);
-	line = get_next_line(fd);
+	line = skip_empty_line(fd);
 	while (line)
 	{
 		tmp_x = ft_strlen(line) - (ft_strchr(line, '\n') != NULL);
 		if (tmp_x > x_max)
 			x_max = tmp_x;
-		y_max++;
+		map->size_y++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (y_max < 3)
-		return (-1);
+	map->size_x = x_max;
 	return (0);
 }
 

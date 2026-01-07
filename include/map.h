@@ -19,7 +19,7 @@ typedef struct s_textures
 	mlx_image	east;
 	mlx_image	west;
 	mlx_color	floor;
-	mlx_color	ceiling;			
+	mlx_color	ceiling;		
 }	t_textures;
 
 typedef struct s_map
