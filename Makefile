@@ -1,6 +1,7 @@
 CC=cc
 NAME = Cub3d
 SRC_DIR = src/
+MLX_DIR = mlx/
 
 SRCS = $(SRC_DIR)cub3d.c \
 
@@ -15,9 +16,10 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I include \
 		-I libft \
 		-I libft/ft_printf/includes \
-		-I libft/get_next_line/
+		-I libft/get_next_line/ \
+		-I $(MLX_DIR)includes
 
-LDFLAGS = $(LIBFT) -lreadline
+LDFLAGS = $(LIBFT) -lreadline -lm $(MLX_DIR)libmlx.so -lSDL2
 
 ifdef SANITIZE
 	CFLAGS += $(FSANITIZE)
@@ -42,7 +44,7 @@ run_sanitize:
 	@echo ""
 	@ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 LSAN_OPTIONS=report_objects=1 ./$(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_DIR)libmlx.so
 	@echo ""
 	@echo "================================"
 	@echo "Creating minishell..."
@@ -61,6 +63,9 @@ $(LIBFT):
 	@echo "================================"
 	@echo ""
 	$(MAKE) -C libft
+
+$(MLX_DIR)libmlx.so:
+	$(MAKE) -C mlx -j
 
 fclean: clean
 	rm -f $(NAME)

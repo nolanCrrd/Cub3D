@@ -1,6 +1,6 @@
 #ifndef MAP_H
 # define MAP_H
-# include "mlx/
+# include "mlx.h"
 
 typedef enum e_map_object
 {
@@ -12,15 +12,20 @@ typedef enum e_map_object
 	WEST
 }	s_map_object;
 
-typedef struct s_texture
+typedef struct s_textures
 {
-	mlx_image	*no
-}	t_texture;
+	mlx_image	north;
+	mlx_image	south;
+	mlx_image	east;
+	mlx_image	west;
+	mlx_color	floor;
+	mlx_color	ceiling;			
+}	t_textures;
 
 typedef struct s_map
 {
-
-	char	**grid;
+	t_textures	*textures;
+	char		**grid;
 }	t_map;
 
 #endif
