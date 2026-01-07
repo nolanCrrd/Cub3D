@@ -26,6 +26,8 @@ typedef struct s_map
 {
 	t_textures	*textures;
 	char		**grid;
+	int			size_x;
+	int			size_y;
 }	t_map;
 
 #endif
