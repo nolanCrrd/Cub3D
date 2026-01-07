@@ -1,5 +1,5 @@
 CC=cc
-NAME = Cub3d
+NAME = cub3D
 SRC_DIR = src/
 MLX_DIR = mlx/
 
