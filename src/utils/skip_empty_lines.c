@@ -7,7 +7,7 @@
  * @param fd
  * @return 
  */
-static char	*skip_empty_line(int fd)
+char	*skip_empty_lines(int fd)
 {
 	char	*line;
 

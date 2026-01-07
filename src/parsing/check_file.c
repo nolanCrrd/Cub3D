@@ -61,7 +61,7 @@ static int	check_textures(int fd, char **already_seen)
 	i = 0;
 	while (i < 6)
 	{
-		line = skip_empty_line(fd);
+		line = skip_empty_lines(fd);
 		if (line == NULL)
 		{
 			ft_dprintf(2, "Error\nMissing necessary line\n");
@@ -94,7 +94,7 @@ int	check_map(int fd, t_map *map)
 	int		tmp_x;
 
 	x_max = 0;
-	line = skip_empty_line(fd);
+	line = skip_empty_lines(fd);
 	while (line)
 	{
 		if (is_blank(line))
@@ -109,6 +109,7 @@ int	check_map(int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	map->size_x = x_max;
 	return (0);
 }

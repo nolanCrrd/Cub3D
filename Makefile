@@ -5,11 +5,13 @@ MLX_DIR = mlx/
 
 SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/parser.c \
+	$(SRC_DIR)parsing/init_map.c
 
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
-	$(SRC_DIR)utils/remove_spaces.c
+	$(SRC_DIR)utils/remove_spaces.c \
+	$(SRC_DIR)utils/skip_empty_lines.c
 
 SRCS = $(SRC_DIR)cub3d.c \
 	$(SRCS_UTILS) \

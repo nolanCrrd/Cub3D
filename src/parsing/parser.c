@@ -26,6 +26,7 @@ t_map	*parse(char *file_path)
 		free(map);
 		return (NULL);
 	}
-	printf("x:%d; y:%d\n", map->size_x, map->size_y);
+	init_map(map);
+	printf("x:%zu; y:%zu\n", map->size_x, map->size_y);
 	return (map);
 }
