@@ -13,12 +13,19 @@ typedef enum e_map_object
 	WEST
 }	s_map_object;
 
+typedef struct s_texture
+{
+	mlx_image	texture;
+	int			height;
+	int			width;
+}	t_texture;
+
 typedef struct s_textures
 {
-	mlx_image	north;
-	mlx_image	south;
-	mlx_image	east;
-	mlx_image	west;
+	t_texture	north;
+	t_texture	west;
+	t_texture	south;
+	t_texture	east;
 	mlx_color	floor;
 	mlx_color	ceiling;		
 }	t_textures;
