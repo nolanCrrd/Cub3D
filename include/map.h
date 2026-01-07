@@ -21,12 +21,12 @@ typedef struct s_texture
 
 typedef struct s_textures
 {
-	t_texture	north;
-	t_texture	west;
-	t_texture	south;
-	t_texture	east;
-	mlx_color	floor;
-	mlx_color	ceiling;		
+	t_texture	*north;
+	t_texture	*west;
+	t_texture	*south;
+	t_texture	*east;
+	mlx_color	*floor;
+	mlx_color	*ceiling;		
 }	t_textures;
 
 typedef struct s_map
