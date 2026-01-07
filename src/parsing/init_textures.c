@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static t_texture	*get_texture(char *path, mlx_context *mlx)
+static t_texture	*get_texture(char *path, mlx_context mlx)
 {
 	t_texture	*new_texture;
 	
@@ -15,11 +15,11 @@ static t_texture	*get_texture(char *path, mlx_context *mlx)
 		perror("cub3D");
 		return (NULL);
 	}
-	new_texture->texture = mlx_new_image_from_file(*mlx, path, &new_texture->width, &new_texture->height);
+	new_texture->texture = mlx_new_image_from_file(mlx, path, &new_texture->width, &new_texture->height);
 	return (new_texture);
 }
 
-int	fill_texture(char *line, mlx_context *mlx, t_textures *textures)
+int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 {
 	if (line[0] == 'N')
 		textures->north = get_texture(line + 2, mlx);
@@ -62,19 +62,24 @@ static int	is_valid_color(char *color)
 	return (1);
 }
 
-static int	fill_color(char *color, mlx_context *mlx, t_textures *textures)
+static int	fill_color(char *color, t_textures *textures)
 {
 	mlx_color	*new_color;
 	int			is_floor;
 
-	if (!*color || !is_valid_color(color))
+	new_color = malloc(sizeof(mlx_color));
+	if (!new_color || !*color || !is_valid_color(color))
+	{
+		free(new_color);
 		return (1);
+	}
 	is_floor = color[0] == 'F';
 	new_color->r = ft_atoi(color, NULL);
 	color = ft_strchr(color, ',') + 1;
 	new_color->g = ft_atoi(color, NULL);
 	color = ft_strchr(color, ',') + 1;
 	new_color->b = ft_atoi(color, NULL);
+	new_color->a = 0xFF;
 	if (is_floor)
 		textures->floor = new_color;
 	else
@@ -82,11 +87,10 @@ static int	fill_color(char *color, mlx_context *mlx, t_textures *textures)
 	return (0);
 }
 
-int	init_textures(int fd, mlx_context *mlx)
+int	init_textures(int fd, mlx_context mlx)
 {
 	t_textures	*textures;
 	char		*line;
-	char		*path;
 	int			loaded_texture;
 
 	textures = ft_calloc(1, sizeof(t_textures));
@@ -101,7 +105,7 @@ int	init_textures(int fd, mlx_context *mlx)
 		line = skip_empty_lines(fd);
 		remove_spaces(line);
 		if (fill_texture(line, mlx, textures))
-			fill_color(line + 1, mlx, textures);
+			fill_color(line + 1, textures);
 		free(line);
 		loaded_texture++;
 	}

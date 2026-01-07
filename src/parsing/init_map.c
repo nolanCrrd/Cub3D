@@ -60,18 +60,6 @@ static void	fill_grid(t_map *map, int fd)
 	free(line);
 }
 
-static void	move_file_cursor_to_map(int fd)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 6)
-	{
-		i++;
-		skip_empty_lines(fd);
-	}
-}
-
 static void	show_map(t_map *map)
 {
 	size_t	current_x;
@@ -91,24 +79,14 @@ static void	show_map(t_map *map)
 	}
 }
 
-int	init_map(t_map *map)
+int	init_map(int fd, t_map *map)
 {
-	int	fd;
-
 	if (init_grid(map))
 	{
 		ft_dprintf(2, "Error\nUnable to init grid\n");
 		return (1);
 	}
-	fd = open(map->file_path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("cub3D");
-		return (1);
-	}
-	move_file_cursor_to_map(fd);
 	fill_grid(map, fd);
-	close(fd);
 	show_map(map);
 	return (0);
 }
