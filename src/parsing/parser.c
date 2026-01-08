@@ -1,6 +1,7 @@
 #include "ctx.h"
 #include "ft_printf.h"
 #include "ctx.h"
+#include "ft_printf/includes/ft_printf.h"
 #include "parsing.h"
 #include "map.h"
 #include "libft.h"
@@ -40,8 +41,16 @@ t_ctx	*parse(char *file_path)
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
-	init_textures(fd, ctx->mlx);
+	init_textures(fd, ctx);
 	init_map(fd, ctx->map);
 	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
+	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+			ctx->map->textures->ceiling->r,
+			ctx->map->textures->ceiling->g,
+			ctx->map->textures->ceiling->b);
+	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+			ctx->map->textures->floor->r,
+			ctx->map->textures->floor->g,
+			ctx->map->textures->floor->b);
 	return (ctx);
 }

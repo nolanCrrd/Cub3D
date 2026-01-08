@@ -1,3 +1,4 @@
+#include "ctx.h"
 #include "ft_printf/includes/ft_printf.h"
 #include "map.h"
 #include "utils.h"
@@ -23,21 +24,31 @@ static t_texture	*get_texture(char *path, mlx_context mlx)
 int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 {
 	if (line[0] == 'N')
+	{
 		textures->north = get_texture(line + 2, mlx);
+		if (textures->north == NULL)
+			return (2);
+	}
 	else if (line[0] == 'S')
+	{
 		textures->south = get_texture(line + 2, mlx);
+		if (textures->north == NULL)
+			return (2);
+	}
 	else if (line[0] == 'E')
+	{
 		textures->east = get_texture(line + 2, mlx);
+		if (textures->north == NULL)
+			return (2);
+	}
 	else if (line[0] == 'W')
+	{
 		textures->west = get_texture(line + 2, mlx);
+		if (textures->north == NULL)
+			return (2);
+	}
 	else
 		return (1);
-	if (textures->north == NULL || textures->south == NULL
-		|| textures->east == NULL || textures->west == NULL)
-	{
-		ft_dprintf(2, "cub3D: Error while loading texture %s", line + 2);
-		return (1);
-	}
 	return (0);
 }
 
@@ -81,7 +92,7 @@ static int	fill_color(char *color, t_textures *textures)
 		return (1);
 	}
 	is_floor = color[0] == 'F';
-	new_color->r = ft_atoi(color, NULL);
+	new_color->r = ft_atoi(color + 1, NULL);
 	color = ft_strchr(color, ',') + 1;
 	new_color->g = ft_atoi(color, NULL);
 	color = ft_strchr(color, ',') + 1;
@@ -94,14 +105,14 @@ static int	fill_color(char *color, t_textures *textures)
 	return (0);
 }
 
-int	init_textures(int fd, mlx_context mlx)
+int	init_textures(int fd, t_ctx *ctx)
 {
-	t_textures	*textures;
 	char		*line;
 	int			loaded_texture;
+	int			err_text_code;
 
-	textures = ft_calloc(1, sizeof(t_textures));
-	if (textures == NULL)
+	ctx->map->textures = ft_calloc(1, sizeof(t_textures));
+	if (ctx->map->textures == NULL)
 	{
 		perror("cub3D");
 		return (1);
@@ -111,8 +122,11 @@ int	init_textures(int fd, mlx_context mlx)
 	{
 		line = skip_empty_lines(fd);
 		remove_spaces(line);
-		if (fill_texture(line, mlx, textures))
-			fill_color(line + 1, textures);
+		err_text_code = fill_texture(line, ctx->mlx, ctx->map->textures);
+		if (err_text_code == 1)
+			fill_color(line, ctx->map->textures);
+		else if (err_text_code == 2)
+			// return (1);
 		free(line);
 		loaded_texture++;
 	}
