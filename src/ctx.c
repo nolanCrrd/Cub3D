@@ -3,26 +3,29 @@
 #include "libft.h"
 #include "map.h"
 #include <stddef.h>
+#include <stdio.h>
 
-static void	destroy_map(t_map *map)
+void	destroy_map(t_map **map)
 {
 	size_t	current_y;
 
 	current_y = 0;
-	if (map->grid)
+	if ((*map)->grid)
 	{
-		while (current_y < map->size_y)
-			free(map->grid[current_y++]);
-		free(map->grid);
+		while (current_y < (*map)->size_y)
+			free((*map)->grid[current_y++]);
+		free((*map)->grid);
 	}
-	// DESTROY TEXTURE
-	free(map);
+	if ((*map)->textures)
+		printf("[TODO] Destroy texture on destroy map\n");
+	free(*map);
+	*map = NULL;
 }
 
 void	destroy_ctx(t_ctx **ctx)
 {
 	if ((*ctx)->map)
-		destroy_map((*ctx)->map);
+		destroy_map(&(*ctx)->map);
 	free((*ctx)->player);
 	free((*ctx));
 	*ctx = NULL;
