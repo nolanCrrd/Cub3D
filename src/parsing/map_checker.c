@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "map.h"
-#include "player.h"
-#include "utils.h"
 
 char	get_tile(t_map *map, size_t x, size_t y)
 {
@@ -13,7 +11,7 @@ char	get_tile(t_map *map, size_t x, size_t y)
 	return (map->grid[y][x]);
 }
 
-static int		is_playable(t_map *map)
+static int	is_playable(t_map *map)
 {
 	size_t	current_y;
 	size_t	current_x;

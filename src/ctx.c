@@ -5,7 +5,23 @@
 #include <stddef.h>
 #include <stdio.h>
 
-void	destroy_map(t_map **map)
+void	destroy_texture(t_textures **textures, t_ctx *ctx)
+{
+	mlx_destroy_image(ctx->mlx, (*textures)->north->texture);
+	free((*textures)->north);
+	mlx_destroy_image(ctx->mlx, (*textures)->south->texture);
+	free((*textures)->south);
+	mlx_destroy_image(ctx->mlx, (*textures)->east->texture);
+	free((*textures)->east);
+	mlx_destroy_image(ctx->mlx, (*textures)->west->texture);
+	free((*textures)->west);
+	free((*textures)->ceiling);
+	free((*textures)->floor);
+	free(*textures);
+	*textures = NULL;
+}
+
+void	destroy_map(t_map **map, t_ctx *ctx)
 {
 	size_t	current_y;
 
@@ -17,7 +33,7 @@ void	destroy_map(t_map **map)
 		free((*map)->grid);
 	}
 	if ((*map)->textures)
-		printf("[TODO] Destroy texture on destroy map\n");
+		destroy_texture(&(*map)->textures, ctx);
 	free(*map);
 	*map = NULL;
 }
@@ -25,7 +41,7 @@ void	destroy_map(t_map **map)
 void	destroy_ctx(t_ctx **ctx)
 {
 	if ((*ctx)->map)
-		destroy_map(&(*ctx)->map);
+		destroy_map(&(*ctx)->map, *ctx);
 	free((*ctx)->player);
 	free((*ctx));
 	*ctx = NULL;

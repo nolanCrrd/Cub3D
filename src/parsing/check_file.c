@@ -118,6 +118,7 @@ int	check_file(t_map *map)
 {
 	char	**already_seen;
 	int		fd;
+	int		err_code;
 
 	fd = open(map->file_path, O_RDONLY);
 	if (fd == -1)
@@ -126,11 +127,8 @@ int	check_file(t_map *map)
 		return (1);
 	}
 	already_seen = ft_calloc(7, sizeof(char *));
-	if (check_textures(fd, already_seen) || check_map(fd, map))
-	{
-		close(fd);
-		return (1);
-	}
+	err_code = check_textures(fd, already_seen) || check_map(fd, map);
+	free(already_seen);
 	close(fd);
-	return (0);
+	return (err_code);
 }

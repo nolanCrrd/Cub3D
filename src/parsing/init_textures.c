@@ -37,7 +37,7 @@ static t_texture	*get_texture(char *path, mlx_context mlx)
  * @param textures 
  * @return 1 if not wll texture / 2 if mlx error / 0 else
  */
-int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
+static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 {
 	if (line[0] == 'N')
 	{

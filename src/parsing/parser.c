@@ -49,6 +49,7 @@ t_ctx	*parse(char *file_path)
 		return (NULL);
 	}
 	close(fd);
+
 	// DEBUG
 	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
 	printf("C : {r: %i, g: %i, b: %i}\n",
