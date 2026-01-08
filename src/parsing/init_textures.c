@@ -1,3 +1,4 @@
+#include "ft_printf/includes/ft_printf.h"
 #include "map.h"
 #include "utils.h"
 #include "libft.h"
@@ -31,6 +32,12 @@ int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 		textures->west = get_texture(line + 2, mlx);
 	else
 		return (1);
+	if (textures->north == NULL || textures->south == NULL
+		|| textures->east == NULL || textures->west == NULL)
+	{
+		ft_dprintf(2, "cub3D: Error while loading texture %s", line + 2);
+		return (1);
+	}
 	return (0);
 }
 
@@ -100,7 +107,7 @@ int	init_textures(int fd, mlx_context mlx)
 		return (1);
 	}
 	loaded_texture = 0;
-	while (loaded_texture < 4)
+	while (loaded_texture < 6)
 	{
 		line = skip_empty_lines(fd);
 		remove_spaces(line);
