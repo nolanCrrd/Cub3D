@@ -41,8 +41,11 @@ t_ctx	*parse(char *file_path)
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
-	init_textures(fd, ctx);
-	init_map(fd, ctx->map);
+	if (init_textures(fd, ctx) || init_map(fd, ctx->map))
+	{
+		destroy_ctx(&ctx);
+		return (NULL);
+	}
 	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
 	ft_printf("C : {r: %i, g: %i, b: %i}\n",
 			ctx->map->textures->ceiling->r,

@@ -18,7 +18,6 @@ static int	init_grid(t_map *map)
 	i = 0;
 	while (i < map->size_y)
 	{
-		printf("%lu/%lu\n", i, map->size_y);
 		map->grid[i] = ft_calloc(map->size_x + 1, sizeof(char));
 		if (!map->grid[i])
 		{
