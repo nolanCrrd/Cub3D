@@ -68,35 +68,44 @@ int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 	return (0);
 }
 
+static int	is_valid_color(char *color)
+{
+	int	val;
+	int	as_overflow;
+
+	val = ft_atoi(color, &as_overflow);
+	if (val > 255 || val < 0 || as_overflow)
+			return (0);
+	return (1);
+}
+
 /**
  * @brief Return a boolean that say if the color code is rga ok
  *
  * @param color 
  * @return 1 if ok / 0 else
  */
-static int	is_valid_color(char *color)
+static int	is_valid_rgb(char *color)
 {
-	int	as_overflow;
-
-	if (ft_isdigit(color[0]))
+	if (ft_isdigit(color[1]) || color[1] == '+' || color[1] == '-')
 	{
-		if (ft_atoi(color, &as_overflow) > 255 || as_overflow)
+		if (!is_valid_color(color + 1))
 			return (0);
 	}
 	color = ft_strchr(color, ',');
 	if (color++ == NULL || !*color)
 		return (0);
-	if (ft_isdigit(color[0]))
+	if (ft_isdigit(color[0]) || color[0] == '+' || color[0] == '-')
 	{
-		if (ft_atoi(color, &as_overflow) > 255 || as_overflow)
+		if (!is_valid_color(color))
 			return (0);
 	}
 	color = ft_strchr(color, ',');
 	if (color++ == NULL || !*color)
 		return (0);
-	if (ft_isdigit(color[0]))
+	if (ft_isdigit(color[0]) || color[0] == '+' || color[0] == '-')
 	{
-		if (ft_atoi(color, &as_overflow) > 255 || as_overflow)
+		if (!is_valid_color(color))
 			return (0);
 	}
 	return (1);
@@ -115,7 +124,7 @@ static int	fill_color(char *color, t_textures *textures)
 	int			is_floor;
 
 	new_color = malloc(sizeof(mlx_color));
-	if (!new_color || !*color || !is_valid_color(color))
+	if (!new_color || !*color || !is_valid_rgb(color))
 	{
 		free(new_color);
 		return (1);
@@ -160,7 +169,13 @@ int	init_textures(int fd, t_ctx *ctx)
 		remove_spaces(line);
 		err_text_code = fill_texture(line, ctx->mlx, ctx->map->textures);
 		if (err_text_code == 1)
-			fill_color(line, ctx->map->textures);
+		{
+			if (fill_color(line, ctx->map->textures))
+			{
+				ft_dprintf(2, "cub3D: Color not respect rgb format\n");
+				return (1);
+			}
+		}
 		else if (err_text_code == 2)
 		{
 			ft_dprintf(2, "cub3D: Error while loading texture\n");
