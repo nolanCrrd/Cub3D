@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	checker(t_map *map)
+int	check_file_extension(t_map *map)
 {
 	if (!ft_endwith(map->file_path, ".cub"))
 	{
@@ -29,7 +29,7 @@ t_ctx	*parse(char *file_path)
 	int		fd;
 
 	ctx = init_ctx(file_path);
-	if (!ctx || checker(ctx->map))
+	if (!ctx || check_file_extension(ctx->map))
 	{
 		destroy_ctx(&ctx);
 		return (NULL);
