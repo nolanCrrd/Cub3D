@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include "ft_printf.h"
@@ -127,6 +128,13 @@ int	check_file(t_map *map)
 		return (1);
 	}
 	already_seen = ft_calloc(7, sizeof(char *));
+	if (!already_seen)
+	{
+		perror("cub3D");
+		free(already_seen);
+		close(fd);
+		return (1);
+	}
 	err_code = check_textures(fd, already_seen) || check_map(fd, map);
 	free(already_seen);
 	close(fd);

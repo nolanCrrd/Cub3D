@@ -42,25 +42,25 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 	if (line[0] == 'N')
 	{
 		textures->north = get_texture(line + 2, mlx);
-		if (textures->north->texture == NULL)
+		if (textures->north == NULL || textures->north->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'S')
 	{
 		textures->south = get_texture(line + 2, mlx);
-		if (textures->south->texture == NULL)
+		if (textures->south == NULL || textures->south->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'E')
 	{
 		textures->east = get_texture(line + 2, mlx);
-		if (textures->east->texture == NULL)
+		if (textures->east == NULL || textures->east->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'W')
 	{
 		textures->west = get_texture(line + 2, mlx);
-		if (textures->west->texture == NULL)
+		if (textures->west == NULL || textures->west->texture == NULL)
 			return (2);
 	}
 	else
@@ -172,12 +172,14 @@ int	init_textures(int fd, t_ctx *ctx)
 		{
 			if (fill_color(line, ctx->map->textures))
 			{
+				free(line);
 				ft_dprintf(2, "cub3D: Color not respect rgb format\n");
 				return (1);
 			}
 		}
 		else if (err_text_code == 2)
 		{
+			free(line);
 			ft_dprintf(2, "cub3D: Error while loading texture\n");
 			return (1);
 		}

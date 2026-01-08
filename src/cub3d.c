@@ -11,6 +11,8 @@ int	main(int argc, char **argv)
 		return (2);
 	}
 	ctx = parse(argv[1]);
+	if (!ctx)
+		return (1);
 	destroy_ctx(&ctx);
 	return (0);
 }

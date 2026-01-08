@@ -15,11 +15,6 @@ int	check_file_extension(t_map *map)
 		ft_dprintf(2, "Error\nFile must be ending with .cub\n");
 		return (1);
 	}
-	if (check_file(map))
-	{
-		free(map);
-		return (1);
-	}
 	return (0);
 }
 
@@ -29,7 +24,7 @@ t_ctx	*parse(char *file_path)
 	int		fd;
 
 	ctx = init_ctx(file_path);
-	if (!ctx || check_file_extension(ctx->map))
+	if (!ctx || check_file_extension(ctx->map) || check_file(ctx->map))
 	{
 		destroy_ctx(&ctx);
 		return (NULL);

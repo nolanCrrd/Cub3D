@@ -5,15 +5,19 @@
 #include <stddef.h>
 #include <stdio.h>
 
-void	destroy_texture(t_textures **textures, t_ctx *ctx)
+void	destroy_textures(t_textures **textures, t_ctx *ctx)
 {
-	mlx_destroy_image(ctx->mlx, (*textures)->north->texture);
+	if ((*textures)->north && (*textures)->north->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->north->texture);
 	free((*textures)->north);
-	mlx_destroy_image(ctx->mlx, (*textures)->south->texture);
+	if ((*textures)->south && (*textures)->south->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->south->texture);
 	free((*textures)->south);
-	mlx_destroy_image(ctx->mlx, (*textures)->east->texture);
+	if ((*textures)->east && (*textures)->east->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->east->texture);
 	free((*textures)->east);
-	mlx_destroy_image(ctx->mlx, (*textures)->west->texture);
+	if ((*textures)->west && (*textures)->west->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->west->texture);
 	free((*textures)->west);
 	free((*textures)->ceiling);
 	free((*textures)->floor);
@@ -33,7 +37,7 @@ void	destroy_map(t_map **map, t_ctx *ctx)
 		free((*map)->grid);
 	}
 	if ((*map)->textures)
-		destroy_texture(&(*map)->textures, ctx);
+		destroy_textures(&(*map)->textures, ctx);
 	free(*map);
 	*map = NULL;
 }
