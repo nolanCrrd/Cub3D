@@ -59,7 +59,7 @@ static void	fill_grid(t_map *map, int fd)
 	free(line);
 }
 
-static void	show_map(t_map *map)
+void	show_map(t_map *map)
 {
 	size_t	current_x;
 	size_t	current_y;
@@ -86,6 +86,5 @@ int	init_map(int fd, t_map *map)
 		return (1);
 	}
 	fill_grid(map, fd);
-	show_map(map);
 	return (0);
 }

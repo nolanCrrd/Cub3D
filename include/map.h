@@ -38,5 +38,6 @@ typedef struct s_map
 	size_t		size_x;
 	size_t		size_y;
 }	t_map;
+void	show_map(t_map *map);
 
 #endif

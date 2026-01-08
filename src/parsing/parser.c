@@ -41,19 +41,25 @@ t_ctx	*parse(char *file_path)
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
-	if (init_textures(fd, ctx) || init_map(fd, ctx->map))
+	if (init_textures(fd, ctx) || init_map(fd, ctx->map)
+		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map))
 	{
+		close(fd);
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
+	close(fd);
+	// DEBUG
 	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
-	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+	printf("C : {r: %i, g: %i, b: %i}\n",
 			ctx->map->textures->ceiling->r,
 			ctx->map->textures->ceiling->g,
 			ctx->map->textures->ceiling->b);
-	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+	printf("F : {r: %i, g: %i, b: %i}\n",
 			ctx->map->textures->floor->r,
 			ctx->map->textures->floor->g,
 			ctx->map->textures->floor->b);
+	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->direction_angle);
+	show_map(ctx->map);
 	return (ctx);
 }
