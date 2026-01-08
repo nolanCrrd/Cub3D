@@ -1,5 +1,5 @@
 #include "ctx.h"
-#include "ft_printf/includes/ft_printf.h"
+#include "ft_printf.h"
 #include "map.h"
 #include "utils.h"
 #include "libft.h"
@@ -7,6 +7,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Return the texture in the struct based based on the given filepath
+ *
+ * @param path 
+ * @param mlx 
+ * @return texture with mlx_image / null if not found
+ */
 static t_texture	*get_texture(char *path, mlx_context mlx)
 {
 	t_texture	*new_texture;
@@ -21,30 +28,39 @@ static t_texture	*get_texture(char *path, mlx_context mlx)
 	return (new_texture);
 }
 
+/**
+ * @brief Create and add the texture to the textures struct at the correct
+ * emplacement
+ *
+ * @param line 
+ * @param mlx 
+ * @param textures 
+ * @return 1 if not wll texture / 2 if mlx error / 0 else
+ */
 int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 {
 	if (line[0] == 'N')
 	{
 		textures->north = get_texture(line + 2, mlx);
-		if (textures->north == NULL)
+		if (textures->north->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'S')
 	{
 		textures->south = get_texture(line + 2, mlx);
-		if (textures->north == NULL)
+		if (textures->south->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'E')
 	{
 		textures->east = get_texture(line + 2, mlx);
-		if (textures->north == NULL)
+		if (textures->east->texture == NULL)
 			return (2);
 	}
 	else if (line[0] == 'W')
 	{
 		textures->west = get_texture(line + 2, mlx);
-		if (textures->north == NULL)
+		if (textures->west->texture == NULL)
 			return (2);
 	}
 	else
@@ -52,6 +68,12 @@ int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 	return (0);
 }
 
+/**
+ * @brief Return a boolean that say if the color code is rga ok
+ *
+ * @param color 
+ * @return 1 if ok / 0 else
+ */
 static int	is_valid_color(char *color)
 {
 	int	as_overflow;
@@ -80,6 +102,13 @@ static int	is_valid_color(char *color)
 	return (1);
 }
 
+/**
+ * @brief Fill the color into textures struct at the correct emplacement
+ *
+ * @param color 
+ * @param textures 
+ * @return 1 if error / 0 else
+ */
 static int	fill_color(char *color, t_textures *textures)
 {
 	mlx_color	*new_color;
@@ -105,6 +134,13 @@ static int	fill_color(char *color, t_textures *textures)
 	return (0);
 }
 
+/**
+ * @brief Init all the texture (wall and floor)
+ *
+ * @param fd 
+ * @param ctx 
+ * @return 1 if loading error / 0 else
+ */
 int	init_textures(int fd, t_ctx *ctx)
 {
 	char		*line;
@@ -118,7 +154,7 @@ int	init_textures(int fd, t_ctx *ctx)
 		return (1);
 	}
 	loaded_texture = 0;
-	while (loaded_texture < 6)
+	while (loaded_texture++ < 6)
 	{
 		line = skip_empty_lines(fd);
 		remove_spaces(line);
@@ -126,9 +162,11 @@ int	init_textures(int fd, t_ctx *ctx)
 		if (err_text_code == 1)
 			fill_color(line, ctx->map->textures);
 		else if (err_text_code == 2)
-			// return (1);
+		{
+			ft_dprintf(2, "cub3D: Error while loading texture\n");
+			return (1);
+		}
 		free(line);
-		loaded_texture++;
 	}
 	return (0);
 }
