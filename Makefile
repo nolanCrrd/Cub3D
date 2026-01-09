@@ -6,15 +6,20 @@ MLX_DIR = mlx/
 SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/init_textures.c \
+	$(SRC_DIR)parsing/init_textures_verif.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \
 	$(SRC_DIR)parsing/map_checker.c
 
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
+	$(SRC_DIR)render/hooks/window_hooks.c \
+	$(SRC_DIR)render/hooks/keyboard_hooks.c \
+	$(SRC_DIR)render/update.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
-	$(SRC_DIR)utils/skip_empty_lines.c
+	$(SRC_DIR)utils/skip_empty_lines.c \
+	$(SRC_DIR)utils/refresh_frame_time.c
 
 SRCS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
@@ -74,6 +79,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)utils
 	@mkdir -p $(OBJ_DIR)parsing
 	@mkdir -p $(OBJ_DIR)render
+	@mkdir -p $(OBJ_DIR)render/hooks
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

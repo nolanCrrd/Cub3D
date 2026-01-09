@@ -10,6 +10,8 @@ typedef struct s_ctx
 	mlx_window	win;
 	t_player	*player;
 	t_map		*map;
+	double		old_frame;
+	double		frame;
 }	t_ctx;
 
 t_ctx	*init_ctx(char *file_path);

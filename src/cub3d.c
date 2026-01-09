@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include "parsing.h"
+#include "render.h"
 
 int	main(int argc, char **argv)
 {
@@ -13,6 +14,7 @@ int	main(int argc, char **argv)
 	ctx = parse(argv[1]);
 	if (!ctx)
 		return (1);
+	render_cub3d(ctx);
 	destroy_ctx(&ctx);
 	return (0);
 }

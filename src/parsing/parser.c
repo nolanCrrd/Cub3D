@@ -55,7 +55,7 @@ t_ctx	*parse(char *file_path)
 			ctx->map->textures->floor->r,
 			ctx->map->textures->floor->g,
 			ctx->map->textures->floor->b);
-	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->direction_angle);
+	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->dir_a);
 	show_map(ctx->map);
 	return (ctx);
 }

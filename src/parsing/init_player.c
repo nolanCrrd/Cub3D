@@ -2,6 +2,7 @@
 #include "ft_printf.h"
 #include "map.h"
 #include "player.h"
+#include "calc.h"
 #include <math.h>
 
 static int	init_start_position(t_map *map, t_player *player)
@@ -39,15 +40,15 @@ static void	init_direction(t_map *map, t_player *player)
 
 	direction_type = map->grid[(size_t)player->pos[Y]][(size_t)player->pos[X]];
 	if (direction_type == 'N')
-		player->direction_angle = 90;
+		player->dir_a = 270;
 	else if (direction_type == 'S')
-		player->direction_angle = 270;
+		player->dir_a = 90;
 	else if (direction_type == 'E')
-		player->direction_angle = 0;
+		player->dir_a = 0;
 	else
-		player->direction_angle = 180;
-	player->direction_vec[X] = cos(player->direction_angle);
-	player->direction_vec[X] = sin(player->direction_angle);
+		player->dir_a = 180;
+	player->dir_vec[X] = cos(RAD(player->dir_a));
+	player->dir_vec[Y] = sin(RAD(player->dir_a));
 }
 
 int	init_player(t_map *map, t_player *player)

@@ -3,6 +3,9 @@
 # include <stddef.h>
 # include "mlx.h"
 
+#define	X 0
+#define Y 1
+
 typedef enum e_map_object
 {
 	AIR,

@@ -147,10 +147,7 @@ int	init_textures(int fd, t_ctx *ctx)
 		line = skip_empty_lines(fd);
 		remove_spaces(line);
 		if (fill_all(line, ctx))
-		{
-			free(line);
 			return (1);
-		}
 		free(line);
 	}
 	return (0);
