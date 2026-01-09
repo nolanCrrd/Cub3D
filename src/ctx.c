@@ -3,26 +3,49 @@
 #include "libft.h"
 #include "map.h"
 #include <stddef.h>
+#include <stdio.h>
 
-static void	destroy_map(t_map *map)
+void	destroy_textures(t_textures **textures, t_ctx *ctx)
+{
+	if ((*textures)->north && (*textures)->north->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->north->texture);
+	free((*textures)->north);
+	if ((*textures)->south && (*textures)->south->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->south->texture);
+	free((*textures)->south);
+	if ((*textures)->east && (*textures)->east->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->east->texture);
+	free((*textures)->east);
+	if ((*textures)->west && (*textures)->west->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->west->texture);
+	free((*textures)->west);
+	free((*textures)->ceiling);
+	free((*textures)->floor);
+	free(*textures);
+	*textures = NULL;
+}
+
+void	destroy_map(t_map **map, t_ctx *ctx)
 {
 	size_t	current_y;
 
 	current_y = 0;
-	if (map->grid)
+	if ((*map)->grid)
 	{
-		while (current_y < map->size_y)
-			free(map->grid[current_y++]);
-		free(map->grid);
+		while (current_y < (*map)->size_y)
+			free((*map)->grid[current_y++]);
+		free((*map)->grid);
 	}
-	// DESTROY TEXTURE
-	free(map);
+	if ((*map)->textures)
+		destroy_textures(&(*map)->textures, ctx);
+	free(*map);
+	*map = NULL;
 }
 
 void	destroy_ctx(t_ctx **ctx)
 {
 	if ((*ctx)->map)
-		destroy_map((*ctx)->map);
+		destroy_map(&(*ctx)->map, *ctx);
 	free((*ctx)->player);
 	free((*ctx));
 	*ctx = NULL;

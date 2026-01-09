@@ -3,8 +3,8 @@
 
 # define PLAYER_BASE_SPEED 10;
 
-#define	X 0;
-#define Y 1;
+#define	X 0
+#define Y 1
 
 typedef struct s_player
 {

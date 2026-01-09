@@ -6,7 +6,9 @@ MLX_DIR = mlx/
 SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/init_textures.c \
-	$(SRC_DIR)parsing/init_map.c
+	$(SRC_DIR)parsing/init_map.c \
+	$(SRC_DIR)parsing/init_player.c \
+	$(SRC_DIR)parsing/map_checker.c
 
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 

@@ -8,16 +8,11 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	checker(t_map *map)
+int	check_file_extension(t_map *map)
 {
 	if (!ft_endwith(map->file_path, ".cub"))
 	{
 		ft_dprintf(2, "Error\nFile must be ending with .cub\n");
-		return (1);
-	}
-	if (check_file(map))
-	{
-		free(map);
 		return (1);
 	}
 	return (0);
@@ -29,7 +24,7 @@ t_ctx	*parse(char *file_path)
 	int		fd;
 
 	ctx = init_ctx(file_path);
-	if (!ctx || checker(ctx->map))
+	if (!ctx || check_file_extension(ctx->map) || check_file(ctx->map))
 	{
 		destroy_ctx(&ctx);
 		return (NULL);
@@ -41,19 +36,26 @@ t_ctx	*parse(char *file_path)
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
-	if (init_textures(fd, ctx) || init_map(fd, ctx->map))
+	if (init_textures(fd, ctx) || init_map(fd, ctx->map)
+		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map))
 	{
+		close(fd);
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
+	close(fd);
+
+	// DEBUG
 	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
-	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+	printf("C : {r: %i, g: %i, b: %i}\n",
 			ctx->map->textures->ceiling->r,
 			ctx->map->textures->ceiling->g,
 			ctx->map->textures->ceiling->b);
-	ft_printf("C : {r: %i, g: %i, b: %i}\n",
+	printf("F : {r: %i, g: %i, b: %i}\n",
 			ctx->map->textures->floor->r,
 			ctx->map->textures->floor->g,
 			ctx->map->textures->floor->b);
+	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->direction_angle);
+	show_map(ctx->map);
 	return (ctx);
 }
