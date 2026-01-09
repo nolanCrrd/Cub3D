@@ -24,7 +24,8 @@ static int	is_playable(t_map *map)
 		while (current_x < map->size_x)
 		{
 			tile = get_tile(map, current_x, current_y);
-			if (tile == '0' || tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W')
+			if (tile == '0' || tile == 'N' || tile == 'S'
+				|| tile == 'E' || tile == 'W')
 			{
 				if (get_tile(map, current_x + 1, current_y) == ' '
 					|| get_tile(map, current_x, current_y + 1) == ' '
@@ -39,7 +40,7 @@ static int	is_playable(t_map *map)
 	return (1);
 }
 
-int		is_valid_map(t_map *map)
+int	is_valid_map(t_map *map)
 {
 	if (!is_playable(map))
 	{

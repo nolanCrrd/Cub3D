@@ -10,16 +10,15 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-
 /**
- * @brief Tell if the line contain a valid texture and if it wasn't already already_seen
- * and add it to texture already seen
+ * @brief Tell if the line contain a valid texture and if it
+ * wasn't already already_seen and add it to texture already seen
  *
  * @param line
  * @param already_seen 
  * @return 
  */
-static int is_valid_texture(char *line, char **already_seen)
+static int	is_valid_texture(char *line, char **already_seen)
 {
 	const char	*valid[] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
 	size_t		i;
@@ -33,7 +32,8 @@ static int is_valid_texture(char *line, char **already_seen)
 			j = -1;
 			while (already_seen[++j])
 			{
-				if (ft_strncmp(line, already_seen[j], ft_strlen(already_seen[j])) == 0)
+				if (ft_strncmp(line, already_seen[j],
+						ft_strlen(already_seen[j])) == 0)
 				{
 					ft_dprintf(2, "Error\nDuplicate texture (%s)\n", valid[i]);
 					return (0);

@@ -2,32 +2,33 @@
 #include "ft_printf.h"
 #include "map.h"
 #include "player.h"
+#include <math.h>
 
 static int	init_start_position(t_map *map, t_player *player)
 {
-	size_t	current_x;
-	size_t	current_y;
+	size_t	cr_x;
+	size_t	cr_y;
 
-	current_y = 0;
-	while (current_y < map->size_y)
+	cr_y = 0;
+	while (cr_y < map->size_y)
 	{
-		current_x = 0;
-		while (current_x < map->size_x)
+		cr_x = 0;
+		while (cr_x < map->size_x)
 		{
-			if (map->grid[current_y][current_x] == 'N' || map->grid[current_y][current_x] == 'S'
-				|| map->grid[current_y][current_x] == 'E' || map->grid[current_y][current_x] == 'W')
+			if (map->grid[cr_y][cr_x] == 'N' || map->grid[cr_y][cr_x] == 'S'
+				|| map->grid[cr_y][cr_x] == 'E' || map->grid[cr_y][cr_x] == 'W')
 			{
 				if (player->pos[X] != -1)
 				{
 					ft_dprintf(2, "Error\nMultiple start position\n");
 					return (1);
 				}
-				player->pos[X] = current_x;
-				player->pos[Y] = current_y;
+				player->pos[X] = cr_x;
+				player->pos[Y] = cr_y;
 			}
-			current_x++;
+			cr_x++;
 		}
-		current_y++;
+		cr_y++;
 	}
 	return (player->pos[X] == -1);
 }
@@ -45,6 +46,8 @@ static void	init_direction(t_map *map, t_player *player)
 		player->direction_angle = 0;
 	else
 		player->direction_angle = 180;
+	player->direction_vec[X] = cos(player->direction_angle);
+	player->direction_vec[X] = sin(player->direction_angle);
 }
 
 int	init_player(t_map *map, t_player *player)
