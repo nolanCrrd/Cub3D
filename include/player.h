@@ -9,8 +9,8 @@
 typedef struct s_player
 {
 	double	pos[2];
-	double	direction_angle;
 	double	direction_vec[2];
+	double	direction_angle;
 	double	speed;
 }	t_player;
 
