@@ -11,10 +11,15 @@ SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/init_player.c \
 	$(SRC_DIR)parsing/map_checker.c
 
+SRCS_MOVEMENT = $(SRC_DIR)movement_logic/movement.c \
+	$(SRC_DIR)movement_logic/rotate.c \
+
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 	$(SRC_DIR)render/hooks/window_hooks.c \
-	$(SRC_DIR)render/hooks/keyboard_hooks.c \
+	$(SRC_DIR)render/hooks/keydown_hooks.c \
+	$(SRC_DIR)render/hooks/keyup_hooks.c \
 	$(SRC_DIR)render/update.c \
+	$(SRC_DIR)render/raycaster/raycaster.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
@@ -25,6 +30,7 @@ SRCS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
 	$(SRCS_UTILS) \
 	$(SRCS_PARSING) \
+	$(SRCS_MOVEMENT) \
 	$(SRCS_RENDER)
 
 OBJ_DIR = .build/
@@ -41,7 +47,7 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I libft/get_next_line/ \
 		-I $(MLX_DIR)includes
 
-LDFLAGS = $(LIBFT) -lreadline -lm $(MLX_DIR)libmlx.so -lSDL2
+LDFLAGS = $(LIBFT) -lm $(MLX_DIR)libmlx.so -lSDL2
 
 ifdef SANITIZE
 	CFLAGS += $(FSANITIZE)
@@ -79,7 +85,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)utils
 	@mkdir -p $(OBJ_DIR)parsing
 	@mkdir -p $(OBJ_DIR)render
+	@mkdir -p $(OBJ_DIR)movement_logic
 	@mkdir -p $(OBJ_DIR)render/hooks
+	@mkdir -p $(OBJ_DIR)render/raycaster
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):

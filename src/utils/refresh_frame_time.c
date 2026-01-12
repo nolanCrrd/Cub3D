@@ -10,4 +10,5 @@ void	refresh_frame_time(t_ctx *ctx)
 	gettimeofday(&tv, NULL);
 	ctx->old_frame = ctx->frame;
 	ctx->frame = tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0;
+	ctx->frame_time = ctx->frame - ctx->old_frame;
 }

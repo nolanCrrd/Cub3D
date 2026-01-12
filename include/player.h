@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# define P_M_SPEED 5
-# define P_R_SPEED 3
+# define P_M_SPEED 2
+# define P_R_SPEED 1.5
 
 typedef struct s_player
 {
@@ -11,6 +11,9 @@ typedef struct s_player
 	double	plane[2];
 	double	dir_a;
 	double	speed;
+	int		movement[5];
+	int		rotate[2];
 }	t_player;
+
 
 #endif
