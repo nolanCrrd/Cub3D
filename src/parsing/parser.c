@@ -44,18 +44,6 @@ t_ctx	*parse(char *file_path)
 		return (NULL);
 	}
 	close(fd);
-
-	// DEBUG
-	printf("x:%zu; y:%zu\n", ctx->map->size_x, ctx->map->size_y);
-	printf("C : {r: %i, g: %i, b: %i}\n",
-			ctx->map->textures->ceiling->r,
-			ctx->map->textures->ceiling->g,
-			ctx->map->textures->ceiling->b);
-	printf("F : {r: %i, g: %i, b: %i}\n",
-			ctx->map->textures->floor->r,
-			ctx->map->textures->floor->g,
-			ctx->map->textures->floor->b);
-	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->dir_a);
-	show_map(ctx->map);
+	ctx->map->grid[(size_t)ctx->player->pos[Y]][(size_t)ctx->player->pos[X]] = '0';
 	return (ctx);
 }

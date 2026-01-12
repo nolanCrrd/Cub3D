@@ -3,7 +3,6 @@
 #include "mlx.h"
 #include "player.h"
 #include <endian.h>
-#include <stdio.h>
 
 static void	player_movement(int key, t_ctx *ctx)
 {
@@ -16,7 +15,7 @@ static void	player_movement(int key, t_ctx *ctx)
 	if (key == KEY_D)
 		ctx->player->movement[3] = 1;
 	if (key == KEY_SHIFT)
-		ctx->player->speed = P_M_SPEED * 1.5;
+		ctx->player->speed = P_M_SPEED * 2;
 }
 
 static void	rotate_player(int key, t_ctx *ctx)

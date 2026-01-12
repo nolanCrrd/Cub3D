@@ -1,7 +1,7 @@
 #include "ctx.h"
 #include "math.h"
 
-static void rotate_dir(double *dir, double *plane, double r_speed)
+void rotate_dir(double *dir, double *plane, double r_speed)
 {
 	double	old_dir[2];
 	double	old_plane[2];

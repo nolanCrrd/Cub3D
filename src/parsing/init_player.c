@@ -59,6 +59,7 @@ int	init_player(t_map *map, t_player *player)
 {
 	player->pos[X] = -1;
 	player->pos[Y] = -1;
+	player->mouse_x = -1;
 	if (init_start_position(map, player))
 	{
 		if (player->pos[X] == -1)

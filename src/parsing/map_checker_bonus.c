@@ -37,7 +37,7 @@ static int	is_playable(t_map *map)
 
 int	check_map_character(t_map *map)
 {
-	const char	allowed_character[] = "01 NSEW";
+	const char	allowed_character[] = "01 NSEWD";
 	size_t		current_x;
 	size_t		current_y;
 
