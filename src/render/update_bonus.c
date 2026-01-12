@@ -27,6 +27,7 @@ void update(void *ptr)
 	}
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
-	mlx_string_put(ctx->mlx, ctx->win, 30, 30, (mlx_color){.rgba = 0xFFFFFFFF}, test);
+	display_map(ctx);
+	//mlx_string_put(ctx->mlx, ctx->win, 30, 30, (mlx_color){.rgba = 0xFFFFFFFF}, test);
 	frame_count++;
 }

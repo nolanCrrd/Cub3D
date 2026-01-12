@@ -44,7 +44,10 @@ SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer.c \
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
 	$(SRC_DIR)utils/skip_empty_lines.c \
-	$(SRC_DIR)utils/refresh_frame_time.c
+	$(SRC_DIR)utils/refresh_frame_time.c \
+	$(SRC_DIR)utils/get_tile.c
+
+SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c
 
 SRCS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
@@ -58,7 +61,8 @@ SRCS_BONUS = $(SRC_DIR)cub3d.c \
 	$(SRCS_UTILS) \
 	$(SRCS_PARSING_BONUS) \
 	$(SRCS_MOVEMENT_BONUS) \
-	$(SRCS_RENDER_BONUS)
+	$(SRCS_RENDER_BONUS) \
+	$(SRCS_HUD_BONUS)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -126,6 +130,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)movement_logic
 	@mkdir -p $(OBJ_DIR)render/hooks
 	@mkdir -p $(OBJ_DIR)render/raycaster
+	@mkdir -p $(OBJ_DIR)render/hud/map_bonus.c
 	$(CC) $(CFLAGS) $< -c -o $@
 
 $(LIBFT):
