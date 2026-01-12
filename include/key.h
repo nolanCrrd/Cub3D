@@ -1,6 +1,8 @@
 #ifndef KEY_H
 # define KEY_H
 
+# define KEY_ESC 41
+
 # define KEY_A 4
 # define KEY_D 7
 # define KEY_W 26

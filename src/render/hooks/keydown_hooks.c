@@ -1,5 +1,6 @@
 #include "ctx.h"
 #include "key.h"
+#include "mlx.h"
 #include "player.h"
 #include <endian.h>
 #include <stdio.h>
@@ -18,7 +19,6 @@ static void	player_movement(int key, t_ctx *ctx)
 		ctx->player->speed = P_M_SPEED * 1.5;
 }
 
-
 static void	rotate_player(int key, t_ctx *ctx)
 {
 	if (key == KEY_LEFT)
@@ -34,4 +34,6 @@ void	all_keydown_hooks(int key, void *ptr)
 	ctx = (t_ctx *)ptr;
 	player_movement(key, ctx);
 	rotate_player(key, ctx);
+	if (key == KEY_ESC)
+		mlx_loop_end(ctx->mlx);
 }

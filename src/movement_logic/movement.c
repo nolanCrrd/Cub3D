@@ -1,5 +1,6 @@
 #include "ctx.h"
 
+// TODO: Probleme de colision chelou
 void	player_move(t_ctx *ctx)
 {
 	double	move_speed;
@@ -23,7 +24,6 @@ void	player_move(t_ctx *ctx)
 			* move_speed)][(int)(ctx->player->pos[X])] == '0')
 			ctx->player->pos[Y] -= ctx->player->dir_vec[Y] * move_speed;
 	}
-	// TODO : Pouvoir strafe
 	if (ctx->player->movement[2] && !ctx->player->movement[3])
 	{
 		if (ctx->map->grid[(int)ctx->player->pos[Y]][(int)(ctx->player->pos[X]

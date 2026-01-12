@@ -1,11 +1,14 @@
 #include "ctx.h"
+#include "map.h"
 #include "mlx.h"
 #include "mlx_extended.h"
 #include "render.h"
 #include "libft.h"
 #include "math.h"
+#include <math.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void	set_ray_val(t_ray *ray, int raynumber, t_ctx *ctx)
 {
@@ -53,30 +56,71 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 		ray->perp_dist = ray->side_dist[Y] - ray->delta[Y];
 }
 
-void	draw_ctx_image(t_ray *ray, int x, t_ctx *ctx)
+t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 {
-	int	line_height;
-	int	start;
+	if (ray->side_hit == 1)
+	{
+		if (ray->ray_dir[Y] > 0 && ray->ray_dir[Y] != 1e30)
+			return (ctx->map->textures->north);
+		return (ctx->map->textures->south);
+	}
+	if (ray->ray_dir[X] > 0 && ray->ray_dir[X] != 1e30)
+		return (ctx->map->textures->west);
+	return (ctx->map->textures->east);
+}
 
-	// TODO : Comprendre pk ces valeur (hauteur joueur)
+static void	draw_ctx_image_texture(t_ray *ray, int raynumber, t_ctx *ctx)
+{
+	t_texture			*texture;
+	double				wall_x;
+	int					tex[2];
+	int					line_height;
+	int					start;
+	double				step_y;
+	double				tex_pos;
+	int					draw_y;
+	static mlx_color	line_pixels[WIN_H];
+
 	line_height = (int)(WIN_H / ray->perp_dist);
 	start = -line_height / 2 + WIN_H / 2;
 
-	if (start < 0)
-		start = 0;
-	if (line_height >= WIN_H)
-		line_height = WIN_H;
-	// test
-	mlx_color	*color = malloc(sizeof(mlx_color) * line_height);
-	for (int i = 0; i < line_height; i++)
+	texture = get_correct_texture(ray, ctx);
+	if (ray->side_hit == 0)
+		wall_x = ctx->player->pos[Y] + ray->perp_dist * ray->ray_dir[Y];
+	else
+		wall_x = ctx->player->pos[X] + ray->perp_dist * ray->ray_dir[X];
+	wall_x -= floor(wall_x);
+
+	tex[X] = wall_x * texture->width;
+	if ((ray->side_hit == 0 && ray->ray_dir[X] > 0))
+		tex[X] = texture->width - tex[X] - 1;
+	if ((ray->side_hit == 1 && ray->ray_dir[Y] < 0))
+		tex[X] = texture->width - tex[X] - 1;
+
+	step_y = 1.0 * texture->height / line_height;
+	tex_pos = ((start >= 0) * start - WIN_H / 2.0 + line_height / 2.0) * step_y;
+	draw_y = 0;
+	while (draw_y < WIN_H)
 	{
-		if (ray->side_hit == 0)
-			color[i].rgba = 0x7CFC00FF;
-		if (ray->side_hit == 1)
-			color[i].rgba = 0xFF0000FF;
+		if (draw_y < start)
+			line_pixels[draw_y] = (mlx_color){.rgba = ctx->map->textures->ceiling->rgba};
+		else if (draw_y < start + line_height)
+		{
+			tex[Y] = (int)tex_pos & (texture->height - 1);
+			tex_pos += step_y;
+			line_pixels[draw_y] = mlx_get_image_pixel(ctx->mlx, texture->texture, tex[X], tex[Y]);
+			if (ray->side_hit == 1)
+			{
+				line_pixels[draw_y].r *= 0.8;
+				line_pixels[draw_y].g *= 0.8;
+				line_pixels[draw_y].b *= 0.8;
+			}
+		}
+		else
+			line_pixels[draw_y] = (mlx_color){.rgba = ctx->map->textures->floor->rgba};
+		draw_y++;
 	}
-	mlx_set_image_region(ctx->mlx, ctx->render, x, start, 1, line_height, color);
-	free(color);
+	mlx_set_image_region(ctx->mlx, ctx->render, raynumber, 0, 1, WIN_H, line_pixels);
 }
 
 void	raycaster(t_ctx *ctx)
@@ -85,16 +129,12 @@ void	raycaster(t_ctx *ctx)
 	t_ray	ray;
 	
 	raynumber = 0;
-	static mlx_color color[WIN_H * WIN_W]; // Tu malloc TOUTE l'image
-	for (int i = 0; i < WIN_H * WIN_W; i++)
-		color[i].rgba = 0x000000FF; // Tu remplis que WIN_H pixels alors que t'as WIN_H * WIN_W !
-	mlx_set_image_region(ctx->mlx, ctx->render, 0, 0, WIN_W, WIN_H, color);
 	while (raynumber < WIN_W)
 	{
 		ft_bzero(&ray, sizeof(t_ray));
 		set_ray_val(&ray, raynumber, ctx);
 		hit_loop(&ray, ctx);
-		draw_ctx_image(&ray, raynumber, ctx);
+		draw_ctx_image_texture(&ray, raynumber, ctx);
 		raynumber++;
 	}
 }
