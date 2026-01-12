@@ -57,5 +57,8 @@ t_ctx	*parse(char *file_path)
 			ctx->map->textures->floor->b);
 	printf("PLAYER DATA : {x: %f, y: %f, direction: %f}\n", ctx->player->pos[X], ctx->player->pos[Y], ctx->player->dir_a);
 	show_map(ctx->map);
+
+	// Set player start pos to 0
+	ctx->map->grid[(size_t)ctx->player->pos[Y]][(size_t)ctx->player->pos[X]] = '0';
 	return (ctx);
 }

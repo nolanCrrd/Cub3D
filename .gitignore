@@ -1,6 +1,7 @@
 # Other
 vgcore*
 cub3D
+cub3D_bonus
 .build/
 .cache/
 .vscode/

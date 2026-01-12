@@ -1,5 +1,6 @@
 CC=cc
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 SRC_DIR = src/
 MLX_DIR = mlx/
 
@@ -10,6 +11,14 @@ SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \
 	$(SRC_DIR)parsing/map_checker.c
+
+SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file.c \
+	$(SRC_DIR)parsing/parser.c \
+	$(SRC_DIR)parsing/init_textures.c \
+	$(SRC_DIR)parsing/init_textures_verif.c \
+	$(SRC_DIR)parsing/init_map.c \
+	$(SRC_DIR)parsing/init_player.c \
+	$(SRC_DIR)parsing/map_checker_bonus.c
 
 SRCS_MOVEMENT = $(SRC_DIR)movement_logic/movement.c \
 	$(SRC_DIR)movement_logic/rotate.c \
@@ -33,8 +42,16 @@ SRCS = $(SRC_DIR)cub3d.c \
 	$(SRCS_MOVEMENT) \
 	$(SRCS_RENDER)
 
+SRCS_BONUS = $(SRC_DIR)cub3d.c \
+	$(SRC_DIR)ctx.c \
+	$(SRCS_UTILS) \
+	$(SRCS_PARSING_BONUS) \
+	$(SRCS_MOVEMENT) \
+	$(SRCS_RENDER)
+
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJS_BONUS = $(SRCS_BONUS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 LIBFT = ./libft/libft.a
 
 FSANITIZE = -fsanitize=address,undefined,leak -fno-omit-frame-pointer \
@@ -56,6 +73,8 @@ endif
 
 all: $(NAME)
 
+bonus: $(NAME_BONUS)
+
 sanitize:
 	@echo ""
 	@echo "================================"
@@ -75,10 +94,18 @@ run_sanitize:
 $(NAME): $(OBJS) $(LIBFT) $(MLX_DIR)libmlx.so
 	@echo ""
 	@echo "================================"
-	@echo "Creating minishell..."
+	@echo "Creating cub3D..."
 	@echo "================================"
 	@echo ""
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX_DIR)libmlx.so
+	@echo ""
+	@echo "================================"
+	@echo "Creating cub3D_bonus..."
+	@echo "================================"
+	@echo ""
+	$(CC) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)

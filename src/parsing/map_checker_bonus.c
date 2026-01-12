@@ -43,7 +43,7 @@ static int	is_playable(t_map *map)
 
 int	check_map_character(t_map *map)
 {
-	const char	allowed_character[] = "01 NSEW";
+	const char	allowed_character[] = "01 NSEWD";
 	size_t		current_x;
 	size_t		current_y;
 
@@ -54,7 +54,10 @@ int	check_map_character(t_map *map)
 		while (current_x < map->size_x)
 		{
 			if (!ft_strchr(allowed_character, map->grid[current_y][current_x]))
+			{
+				printf("%d\n", map->grid[current_y][current_x]);
 				return (1);
+			}
 			current_x++;
 		}
 		current_y++;
