@@ -23,11 +23,22 @@ SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file.c \
 SRCS_MOVEMENT = $(SRC_DIR)movement_logic/movement.c \
 	$(SRC_DIR)movement_logic/rotate.c \
 
+SRCS_MOVEMENT_BONUS = $(SRC_DIR)movement_logic/movement.c \
+	$(SRC_DIR)movement_logic/rotate.c \
+	$(SRC_DIR)movement_logic/mouse_bonus.c
+
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 	$(SRC_DIR)render/hooks/window_hooks.c \
 	$(SRC_DIR)render/hooks/keydown_hooks.c \
 	$(SRC_DIR)render/hooks/keyup_hooks.c \
 	$(SRC_DIR)render/update.c \
+	$(SRC_DIR)render/raycaster/raycaster.c \
+
+SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer.c \
+	$(SRC_DIR)render/hooks/window_hooks.c \
+	$(SRC_DIR)render/hooks/keydown_hooks.c \
+	$(SRC_DIR)render/hooks/keyup_hooks.c \
+	$(SRC_DIR)render/update_bonus.c \
 	$(SRC_DIR)render/raycaster/raycaster.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
@@ -46,8 +57,8 @@ SRCS_BONUS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
 	$(SRCS_UTILS) \
 	$(SRCS_PARSING_BONUS) \
-	$(SRCS_MOVEMENT) \
-	$(SRCS_RENDER)
+	$(SRCS_MOVEMENT_BONUS) \
+	$(SRCS_RENDER_BONUS)
 
 OBJ_DIR = .build/
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

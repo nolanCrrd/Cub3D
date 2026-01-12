@@ -54,10 +54,7 @@ int	check_map_character(t_map *map)
 		while (current_x < map->size_x)
 		{
 			if (!ft_strchr(allowed_character, map->grid[current_y][current_x]))
-			{
-				printf("%d\n", map->grid[current_y][current_x]);
 				return (1);
-			}
 			current_x++;
 		}
 		current_y++;

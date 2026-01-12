@@ -17,7 +17,6 @@ static void	player_movement(int key, t_ctx *ctx)
 		ctx->player->speed = P_M_SPEED;
 }
 
-
 static void	rotate_player(int key, t_ctx *ctx)
 {
 	if (key == KEY_LEFT)

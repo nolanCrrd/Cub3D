@@ -22,6 +22,7 @@ static void	init_render(t_ctx *ctx)
 	mlx_on_event(ctx->mlx, ctx->win, MLX_WINDOW_EVENT, close_hook , ctx);
 	mlx_on_event(ctx->mlx, ctx->win, MLX_KEYDOWN, all_keydown_hooks, ctx);
 	mlx_on_event(ctx->mlx, ctx->win, MLX_KEYUP, all_keyup_hooks, ctx);
+	mlx_mouse_hide(ctx->mlx);
 	mlx_add_loop_hook(ctx->mlx, update, ctx);
 	gettimeofday(&tv, NULL);
 	ctx->frame = tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0;

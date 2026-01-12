@@ -13,6 +13,7 @@ typedef struct s_player
 	double	speed;
 	int		movement[5];
 	int		rotate[2];
+	int		mouse_x;
 }	t_player;
 
 
