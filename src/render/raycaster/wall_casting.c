@@ -49,9 +49,9 @@ void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 		wall_x = ctx->player->pos[X] + ray->perp_dist * ray->ray_dir[X];
 	wall_x -= floor(wall_x);
 	tex[X] = wall_x * texture->width;
-	if ((ray->side_hit == 0 && ray->ray_dir[X] > 0))
+	if ((ray->side_hit == 0 && ray->ray_dir[X] < 0))
 		tex[X] = texture->width - tex[X] - 1;
-	if ((ray->side_hit == 1 && ray->ray_dir[Y] < 0))
+	if ((ray->side_hit == 1 && ray->ray_dir[Y] > 0))
 		tex[X] = texture->width - tex[X] - 1;
 	step_y = 1.0 * texture->height / line_height;
 	tex_pos = ((start >= 0) * start - WIN_H / 2.0 + line_height / 2.0) * step_y;
