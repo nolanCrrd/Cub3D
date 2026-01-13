@@ -48,9 +48,8 @@ SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
 	$(SRC_DIR)utils/skip_empty_lines.c \
 	$(SRC_DIR)utils/refresh_frame_time.c \
-	$(SRC_DIR)utils/get_tile.c \
 	$(SRC_DIR)utils/get_distance.c \
-	$(SRC_DIR)utils/draw_square.c
+	$(SRC_DIR)utils/draw_square.c \
 	$(SRC_DIR)utils/get_near_elmt.c \
 	$(SRC_DIR)utils/get_tile.c
 
