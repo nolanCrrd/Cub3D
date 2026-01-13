@@ -33,7 +33,7 @@ typedef struct s_textures
 	t_texture	*ceiling_tex;
 	t_texture	*floor_tex;
 	mlx_color	*floor;
-	mlx_color	*ceiling;		
+	mlx_color	*ceiling;
 }	t_textures;
 
 typedef struct s_map
