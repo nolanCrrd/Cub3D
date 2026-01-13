@@ -4,7 +4,7 @@
 # define WIN_W 1920
 # define WIN_H 1080
 # define MAP_SIZE 10
-# define MAP_X 50
+# define MAP_X 150
 # define MAP_Y 50
 
 #include "ctx.h"
@@ -21,6 +21,7 @@ void	rotate_dir(double *dir, double *plane, double r_speed);
 void	all_keydown_hooks(int key, void *ptr);
 void	all_keyup_hooks(int key, void *ptr);
 void	display_map(t_ctx *ctx);
+void	display_border(t_ctx *ctx);
 
 // raycaster
 typedef struct s_ray

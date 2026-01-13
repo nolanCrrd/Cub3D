@@ -49,7 +49,8 @@ SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/get_distance.c \
 	$(SRC_DIR)utils/draw_square.c
 
-SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c
+SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c \
+	$(SRC_DIR)render/hud/border_bonus.c
 
 SRCS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
