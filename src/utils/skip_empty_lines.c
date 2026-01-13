@@ -1,5 +1,5 @@
-#include "libft.h"
 #include "utils.h"
+#include "get_next_line.h"
 
 /**
  * @brief Skip all the line int he fd that contain only whitespaces

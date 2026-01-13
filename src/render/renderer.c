@@ -6,6 +6,11 @@
 #include <sys/time.h>
 #include <stdbool.h>
 
+/**
+ * @brief Init all the mlx related data
+ *
+ * @param ctx global cub3d context
+ */
 static void	init_render(t_ctx *ctx)
 {
 	mlx_window_create_info	info;

@@ -1,6 +1,15 @@
 #include "utils.h"
 #include "libft.h"
 
+/**
+ * @brief return the difference of position of the nearby charset
+ * value on the map grid
+ *
+ * @param grid map grid
+ * @param charset element to find near
+ * @param pos position to look arround
+ * @return defference btetween pos and the found element / NULL if not find
+ */
 int	*get_near_elmt(char **grid, char *charset, double *pos)
 {
 	static int	diff[2];

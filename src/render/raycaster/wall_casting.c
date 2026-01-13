@@ -1,6 +1,13 @@
 #include "render.h"
 #include "math.h"
 
+/**
+ * @brief Return the correct texture based on the direction that the wall was hit
+ *
+ * @param ray
+ * @param ctx 
+ * @return  structure that contain texture image and it's widht / height
+ */
 static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 {
 	if (ray->side_hit == 1)
@@ -14,6 +21,14 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	return (ctx->map->textures->east);
 }
 
+/**
+ * @brief Put the wall pixels into the pixels array
+ *
+ * @param ray
+ * @param raynumber X represented by the ray
+ * @param pixels Array WIN_H x WIN_W
+ * @param ctx 
+ */
 void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 {
 	t_texture			*texture;

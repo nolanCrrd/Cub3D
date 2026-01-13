@@ -3,6 +3,13 @@
 #include "render.h"
 #include <math.h>
 
+/**
+ * @brief Put all the pixel of the floor and the celling into pixels array
+ *
+ * @param ray 
+ * @param pixels Array of mlx_color (WIN_W x WIN_H)
+ * @param ctx 
+ */
 void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx)
 {
 	float	floor_step[2];
