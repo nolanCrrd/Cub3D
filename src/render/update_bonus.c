@@ -26,7 +26,8 @@ void	update(void *ptr)
 	raycaster(ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
-	display_border(ctx);
 	display_map(ctx);
+	display_rec(ctx);
+	display_border(ctx);
 	render_door_text(ctx);
 }
