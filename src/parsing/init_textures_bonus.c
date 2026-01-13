@@ -50,20 +50,20 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 	else if (line[0] == 'S')
 	{
 		textures->south = get_texture(line + 2, mlx);
-		return ((textures->north == NULL
-				|| textures->north->texture == NULL) * 2);
+		return ((textures->south == NULL
+				|| textures->south->texture == NULL) * 2);
 	}
 	else if (line[0] == 'E')
 	{
 		textures->east = get_texture(line + 2, mlx);
-		return ((textures->north == NULL
-				|| textures->north->texture == NULL) * 2);
+		return ((textures->east == NULL
+				|| textures->east->texture == NULL) * 2);
 	}
 	else if (line[0] == 'W')
 	{
 		textures->west = get_texture(line + 2, mlx);
-		return ((textures->north == NULL
-				|| textures->north->texture == NULL) * 2);
+		return ((textures->west == NULL
+				|| textures->west->texture == NULL) * 2);
 	}
 	else if (line[0] == 'D')
 	{

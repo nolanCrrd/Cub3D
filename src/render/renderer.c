@@ -19,7 +19,7 @@ static void	init_render(t_ctx *ctx)
 	ft_bzero(&info, sizeof(info));
 	info.height = WIN_H;
 	info.width = WIN_W;
-	info.title = "cub3d";
+	info.title = "cub3D";
 	info.is_resizable = false;
 	ctx->win = mlx_new_window(ctx->mlx, &info);
 	mlx_set_fps_goal(ctx->mlx, 120);
@@ -32,7 +32,7 @@ static void	init_render(t_ctx *ctx)
 	ctx->frame = tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0;
 	ctx->old_frame = ctx->frame;
 	ctx->render = mlx_new_image(ctx->mlx, WIN_W, WIN_H);
-	mlx_set_font_scale(ctx->mlx, "default", 16);
+	mlx_set_font_scale(ctx->mlx, "default", 24);
 }
 
 int	render_cub3d(t_ctx *ctx)

@@ -6,6 +6,8 @@
 # define MAP_SIZE 10
 # define MAP_X 150
 # define MAP_Y 50
+# define REC_X 1500
+# define REC_Y 100
 
 #include "ctx.h"
 
@@ -22,6 +24,7 @@ void	all_keydown_hooks(int key, void *ptr);
 void	all_keyup_hooks(int key, void *ptr);
 void	display_map(t_ctx *ctx);
 void	display_border(t_ctx *ctx);
+void	display_rec(t_ctx *ctx);
 
 // raycaster
 typedef struct s_ray

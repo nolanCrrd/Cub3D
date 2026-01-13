@@ -1,9 +1,9 @@
-NO assets/backroom_wall.png
-SO assets/backroom_wall.png
-WE assets/backroom_wall.png
-EA assets/backroom_wall.png
+NO assets/default_wall.png
+SO assets/default_wall.png
+WE assets/default_wall.png
+EA assets/default_wall.png
 
-F 235, 234, 169
+F 69, 69, 69
 C 235, 234, 169
 
         1111111111111111111111111

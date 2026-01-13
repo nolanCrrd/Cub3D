@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 17:08:35 by ehode             #+#    #+#             */
-/*   Updated: 2026/01/13 14:19:27 by ehode            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:19:01 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ static void	draw_wall(t_ctx *ctx)
 			else if (tile == ' ')
 				draw_square(ctx, tmp_pos, 10,
 					(mlx_color){.r = 0xFF, .g = 0xFF, .b = 0x00, .a = 0xC0});
+			else if (tile == 'D')
+				draw_square(ctx, tmp_pos, 10,
+					(mlx_color){.r = 0xFF, .g = 0x00, .b = 0x00, .a = 0xFF});
+			else if (tile == 'O')
+				draw_square(ctx, tmp_pos, 10,
+					(mlx_color){.r = 0x00, .g = 0xFF, .b = 0x00, .a = 0xFF});
 			current_offset[X]++;
 		}
 		current_offset[Y]++;

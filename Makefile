@@ -54,7 +54,8 @@ SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/get_tile.c
 
 SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c \
-	$(SRC_DIR)render/hud/border_bonus.c
+	$(SRC_DIR)render/hud/border_bonus.c \
+	$(SRC_DIR)render/hud/rec_bonus.c
 
 SRCS = $(SRC_DIR)cub3d.c \
 	$(SRC_DIR)ctx.c \
@@ -84,7 +85,8 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I libft \
 		-I libft/ft_printf/includes \
 		-I libft/get_next_line/ \
-		-I $(MLX_DIR)includes
+		-I $(MLX_DIR)includes \
+		-O3
 
 LDFLAGS = $(LIBFT) -lm $(MLX_DIR)libmlx.so -lSDL2
 

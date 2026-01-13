@@ -24,8 +24,8 @@ static int	init_start_position(t_map *map, t_player *player)
 					ft_dprintf(2, "Error\nMultiple start position\n");
 					return (1);
 				}
-				player->pos[X] = cr_x;
-				player->pos[Y] = cr_y;
+				player->pos[X] = cr_x + 0.5;
+				player->pos[Y] = cr_y + 0.5;
 			}
 			cr_x++;
 		}
