@@ -1,10 +1,8 @@
 #include "ctx.h"
-#include "libft.h"
 #include "mlx.h"
 #include "player.h"
 #include "render.h"
 #include "utils.h"
-#include <stdio.h>
 
 int	is_player_moved(t_player *player)
 {

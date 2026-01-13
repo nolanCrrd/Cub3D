@@ -1,13 +1,17 @@
 #include "ctx.h"
 #include "key.h"
-#include "libft.h"
 #include "mlx.h"
 #include "player.h"
 #include "utils.h"
 #include <endian.h>
 #include <stddef.h>
-#include <stdio.h>
 
+/**
+ * @brief Handle all movement W/A/S/D
+ *
+ * @param key 
+ * @param ctx 
+ */
 static void	player_movement(int key, t_ctx *ctx)
 {
 	if (key == KEY_W)
@@ -22,6 +26,12 @@ static void	player_movement(int key, t_ctx *ctx)
 		ctx->player->speed = P_M_SPEED * 2;
 }
 
+/**
+ * @brief Handle rotate arrow
+ *
+ * @param key 
+ * @param ctx 
+ */
 static void	rotate_player(int key, t_ctx *ctx)
 {
 	if (key == KEY_LEFT)
@@ -30,6 +40,12 @@ static void	rotate_player(int key, t_ctx *ctx)
 		ctx->player->rotate[0] = 1;
 }
 
+/**
+ * @brief Handle the open door if one nearby
+ *
+ * @param key 
+ * @param ctx 
+ */
 static void	open_door(int key, t_ctx *ctx)
 {
 	int		*near_door;
@@ -52,6 +68,12 @@ static void	open_door(int key, t_ctx *ctx)
 	}
 }
 
+/**
+ * @brief Listen to all valid key input
+ *
+ * @param key 
+ * @param ptr global cub3d context
+ */
 void	all_keydown_hooks(int key, void *ptr)
 {
 	t_ctx	*ctx;

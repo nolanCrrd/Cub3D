@@ -1,7 +1,13 @@
 #include "render.h"
 #include "math.h"
-#include <stdio.h>
 
+/**
+ * @brief Return the correct texture based on the direction that the wall was hit
+ *
+ * @param ray
+ * @param ctx 
+ * @return  structure that contain texture image and it's widht / height
+ */
 static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 {
 	if (ctx->map->grid[ray->map[Y]][ray->map[X]] == 'D')
@@ -17,6 +23,14 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	return (ctx->map->textures->east);
 }
 
+/**
+ * @brief Put the wall pixels into the pixels array
+ *
+ * @param ray
+ * @param raynumber X represented by the ray
+ * @param pixels Array WIN_H x WIN_W
+ * @param ctx 
+ */
 void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 {
 	t_texture			*texture;
@@ -39,9 +53,9 @@ void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 	wall_x -= floor(wall_x);
 
 	tex[X] = wall_x * texture->width;
-	if ((ray->side_hit == 0 && ray->ray_dir[X] > 0))
+	if ((ray->side_hit == 0 && ray->ray_dir[X] < 0))
 		tex[X] = texture->width - tex[X] - 1;
-	if ((ray->side_hit == 1 && ray->ray_dir[Y] < 0))
+	if ((ray->side_hit == 1 && ray->ray_dir[Y] > 0))
 		tex[X] = texture->width - tex[X] - 1;
 
 	step_y = 1.0 * texture->height / line_height;
