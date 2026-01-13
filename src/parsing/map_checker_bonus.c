@@ -20,7 +20,7 @@ static int	is_playable(t_map *map)
 		{
 			tile = get_tile(map, current_x, current_y);
 			if (tile == '0' || tile == 'N' || tile == 'S'
-				|| tile == 'E' || tile == 'W')
+				|| tile == 'E' || tile == 'W' || tile == 'D')
 			{
 				if (get_tile(map, current_x + 1, current_y) == ' '
 					|| get_tile(map, current_x, current_y + 1) == ' '
