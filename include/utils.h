@@ -11,5 +11,6 @@ void	refresh_frame_time(t_ctx *ctx);
 char	get_tile(t_map *map, size_t x, size_t y);
 float	get_distance(float x1, float x2, float y1, float y2);
 void	draw_square(t_ctx *ctx, int *pos, int size, mlx_color color);
+int		*get_near_elmt(char **grid, char *charset, double *pos);
 
 #endif

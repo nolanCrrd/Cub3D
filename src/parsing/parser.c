@@ -44,6 +44,7 @@ t_ctx	*parse(char *file_path)
 		return (NULL);
 	}
 	close(fd);
-	ctx->map->grid[(size_t)ctx->player->pos[Y]][(size_t)ctx->player->pos[X]] = '0';
+	ctx->map->grid[(size_t)ctx->player->pos[Y]]
+		[(size_t)ctx->player->pos[X]] = '0';
 	return (ctx);
 }

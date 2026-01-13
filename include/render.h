@@ -27,6 +27,8 @@ void	display_border(t_ctx *ctx);
 typedef struct s_ray
 {
 	double	ray_dir[2];
+	double	ray_dir0[2];
+	double	ray_dir1[2];
 	double	step[2];
 	double	delta[2];
 	double	side_dist[2];
@@ -36,6 +38,9 @@ typedef struct s_ray
 	int		hit;
 	int		side_hit;
 }	t_ray;
+
 void	raycaster(t_ctx *ctx);
+void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx);
+void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx);
 
 #endif
