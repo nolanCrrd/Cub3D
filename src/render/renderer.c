@@ -14,7 +14,7 @@ static void	init_render(t_ctx *ctx)
 	ft_bzero(&info, sizeof(info));
 	info.height = WIN_H;
 	info.width = WIN_W;
-	info.title = "cub3d";
+	info.title = "cub3D";
 	info.is_resizable = false;
 	ctx->win = mlx_new_window(ctx->mlx, &info);
 	mlx_set_fps_goal(ctx->mlx, 120);
