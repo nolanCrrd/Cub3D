@@ -45,7 +45,9 @@ SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
 	$(SRC_DIR)utils/skip_empty_lines.c \
 	$(SRC_DIR)utils/refresh_frame_time.c \
-	$(SRC_DIR)utils/get_tile.c
+	$(SRC_DIR)utils/get_tile.c \
+	$(SRC_DIR)utils/get_distance.c \
+	$(SRC_DIR)utils/draw_square.c
 
 SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c
 
