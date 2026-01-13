@@ -70,6 +70,7 @@ void	raycaster(t_ctx *ctx)
 	t_ray	ray;
 
 	raynumber = 0;
+	put_f_c_pixels(&ray, pixels, ctx);
 	while (raynumber < WIN_W)
 	{
 		ft_bzero(&ray, sizeof(t_ray));

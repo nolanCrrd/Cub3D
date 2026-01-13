@@ -1,7 +1,7 @@
 #include "ctx.h"
 #include "math.h"
 
-void rotate_dir(double *dir, double *plane, double r_speed)
+void	rotate_dir(double *dir, double *plane, double r_speed)
 {
 	double	old_dir[2];
 	double	old_plane[2];
@@ -14,7 +14,6 @@ void rotate_dir(double *dir, double *plane, double r_speed)
 		- old_dir[Y] * sin(r_speed);
 	dir[Y] = old_dir[X] * sin(r_speed)
 		+ old_dir[Y] * cos(r_speed);
-
 	plane[X] = old_plane[X] * cos(r_speed)
 		- old_plane[Y] * sin(r_speed);
 	plane[Y] = old_plane[X] * sin(r_speed)

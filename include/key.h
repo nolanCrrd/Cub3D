@@ -8,6 +8,8 @@
 # define KEY_W 26
 # define KEY_S 22
 
+# define KEY_E 8
+
 # define KEY_PLUS 46
 # define KEY_MINUS 45
 

@@ -27,7 +27,7 @@ static void	rotate_player(int key, t_ctx *ctx)
 
 void	all_keyup_hooks(int key, void *ptr)
 {
-	t_ctx *ctx;
+	t_ctx	*ctx;
 
 	ctx = (t_ctx *)ptr;
 	player_movement(key, ctx);

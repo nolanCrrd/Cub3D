@@ -1,8 +1,12 @@
 #include "ctx.h"
 #include "key.h"
+#include "libft.h"
 #include "mlx.h"
 #include "player.h"
+#include "utils.h"
 #include <endian.h>
+#include <stddef.h>
+#include <stdio.h>
 
 static void	player_movement(int key, t_ctx *ctx)
 {
@@ -26,13 +30,36 @@ static void	rotate_player(int key, t_ctx *ctx)
 		ctx->player->rotate[0] = 1;
 }
 
+static void	open_door(int key, t_ctx *ctx)
+{
+	int		*near_door;
+	double	*pos;
+	char	**grid;
+
+	if (key == KEY_E)
+	{
+		pos = ctx->player->pos;
+		grid = ctx->map->grid;
+		near_door = get_near_elmt(ctx->map->grid, "DO", pos);
+		if (!near_door || (near_door[X] == 0 && near_door[Y] == 0))
+			return ;
+		if (grid[(int)pos[Y] + near_door[Y]]
+			[(int)pos[X] + near_door[X]] == 'D')
+			grid[(int)pos[Y] + near_door[Y]][(int)pos[X] + near_door[X]] = 'O';
+		else if (grid[(int)pos[Y] + near_door[Y]]
+			[(int)pos[X] + near_door[X]] == 'O')
+			grid[(int)pos[Y] + near_door[Y]][(int)pos[X] + near_door[X]] = 'D';
+	}
+}
+
 void	all_keydown_hooks(int key, void *ptr)
 {
-	t_ctx *ctx;
+	t_ctx	*ctx;
 
 	ctx = (t_ctx *)ptr;
 	player_movement(key, ctx);
 	rotate_player(key, ctx);
+	open_door(key, ctx);
 	if (key == KEY_ESC)
 		mlx_loop_end(ctx->mlx);
 }

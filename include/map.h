@@ -29,6 +29,9 @@ typedef struct s_textures
 	t_texture	*west;
 	t_texture	*south;
 	t_texture	*east;
+	t_texture	*door;
+	t_texture	*ceiling_tex;
+	t_texture	*floor_tex;
 	mlx_color	*floor;
 	mlx_color	*ceiling;		
 }	t_textures;

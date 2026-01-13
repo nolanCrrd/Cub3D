@@ -3,9 +3,9 @@
 
 void	close_hook(int event, void *ptr)
 {
-	t_ctx *ctx2;
+	t_ctx	*ctx;
 
-	ctx2 = (t_ctx *)ptr;
+	ctx = (t_ctx *)ptr;
 	if (event == 0)
-		mlx_loop_end(ctx2->mlx);
+		mlx_loop_end(ctx->mlx);
 }

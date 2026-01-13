@@ -37,7 +37,7 @@ static int	init_start_position(t_map *map, t_player *player)
 static void	init_direction(t_map *map, t_player *player)
 {
 	char	direction_type;
-	double plane_length;
+	double	plane_length;
 
 	direction_type = map->grid[(size_t)player->pos[Y]][(size_t)player->pos[X]];
 	if (direction_type == 'N')

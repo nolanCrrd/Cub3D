@@ -12,9 +12,9 @@ SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/init_player.c \
 	$(SRC_DIR)parsing/map_checker.c
 
-SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file.c \
+SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file_bonus.c \
 	$(SRC_DIR)parsing/parser.c \
-	$(SRC_DIR)parsing/init_textures.c \
+	$(SRC_DIR)parsing/init_textures_bonus.c \
 	$(SRC_DIR)parsing/init_textures_verif.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \
@@ -33,18 +33,22 @@ SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 	$(SRC_DIR)render/hooks/keyup_hooks.c \
 	$(SRC_DIR)render/update.c \
 	$(SRC_DIR)render/raycaster/raycaster.c \
+	$(SRC_DIR)render/raycaster/wall_casting.c \
 
 SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer.c \
 	$(SRC_DIR)render/hooks/window_hooks.c \
 	$(SRC_DIR)render/hooks/keydown_hooks.c \
 	$(SRC_DIR)render/hooks/keyup_hooks.c \
 	$(SRC_DIR)render/update_bonus.c \
-	$(SRC_DIR)render/raycaster/raycaster.c \
+	$(SRC_DIR)render/raycaster/raycaster_bonus.c \
+	$(SRC_DIR)render/raycaster/wall_casting_bonus.c \
+	$(SRC_DIR)render/raycaster/floor_casting_bonus.c \
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \
 	$(SRC_DIR)utils/skip_empty_lines.c \
 	$(SRC_DIR)utils/refresh_frame_time.c \
+	$(SRC_DIR)utils/get_near_elmt.c \
 	$(SRC_DIR)utils/get_tile.c
 
 SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c
