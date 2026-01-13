@@ -10,6 +10,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Init all the value ofa ray based on it's number (screen x) and player datas
+ *
+ * @param ray ray to init
+ * @param raynumber x that the ray represent on the screen
+ * @param ctx global context of cub3d
+ */
 void	set_ray_val(t_ray *ray, int raynumber, t_ctx *ctx)
 {
 	ray->cam_x = 2.0 * raynumber / WIN_W - 1;
@@ -36,6 +43,12 @@ void	set_ray_val(t_ray *ray, int raynumber, t_ctx *ctx)
 			* ray->delta[Y];
 }
 
+/**
+ * @brief Make the ray move forward until it hit a wall
+ *
+ * @param ray all the ray data (already init)
+ * @param ctx global context of cub3d
+ */
 void	hit_loop(t_ray *ray, t_ctx *ctx)
 {
 	const char	*walls_char = "1D";
@@ -63,6 +76,12 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 		ray->perp_dist = ray->side_dist[Y] - ray->delta[Y];
 }
 
+/**
+ * @brief Calculate the position of all pixel of the screen and put them
+ * into the rneder image
+ *
+ * @param ctx global context of cub3d
+ */
 void	raycaster(t_ctx *ctx)
 {
 	static mlx_color	pixels[WIN_H * WIN_W];

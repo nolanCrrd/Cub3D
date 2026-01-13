@@ -3,6 +3,12 @@
 #include "player.h"
 #include <endian.h>
 
+/**
+ * @brief Reset the movement of W/A/S/D is released
+ *
+ * @param key 
+ * @param ctx 
+ */
 static void	player_movement(int key, t_ctx *ctx)
 {
 	if (key == KEY_W)
@@ -17,6 +23,12 @@ static void	player_movement(int key, t_ctx *ctx)
 		ctx->player->speed = P_M_SPEED;
 }
 
+/**
+ * @brief Reset the rotation of the player if arrow is released
+ *
+ * @param key 
+ * @param ctx 
+ */
 static void	rotate_player(int key, t_ctx *ctx)
 {
 	if (key == KEY_LEFT)
@@ -25,6 +37,12 @@ static void	rotate_player(int key, t_ctx *ctx)
 		ctx->player->rotate[0] = 0;
 }
 
+/**
+ * @brief Liten to all valid realeased key
+ *
+ * @param key 
+ * @param ptr global cub3d context
+ */
 void	all_keyup_hooks(int key, void *ptr)
 {
 	t_ctx	*ctx;

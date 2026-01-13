@@ -3,6 +3,11 @@
 #include <sys/time.h>
 #include "utils.h"
 
+/**
+ * @brief Refresh frames data in global context
+ *
+ * @param ctx 
+ */
 void	refresh_frame_time(t_ctx *ctx)
 {
 	struct timeval	tv;
