@@ -11,7 +11,8 @@
 #include <stdlib.h>
 
 /**
- * @brief Init all the value ofa ray based on it's number (screen x) and player datas
+ * @brief Init all the value ofa ray 
+ * based on it's number (screen x) and player datas
  *
  * @param ray ray to init
  * @param raynumber x that the ray represent on the screen
@@ -86,8 +87,8 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 void	raycaster(int lod, t_ctx *ctx)
 {
 	static mlx_color	pixels[WIN_H * WIN_W];
-	size_t	raynumber;
-	t_ray	ray;
+	size_t				raynumber;
+	t_ray				ray;
 
 	raynumber = 0;
 	put_f_c_pixels(&ray, lod, pixels, ctx);
