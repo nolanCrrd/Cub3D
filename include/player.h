@@ -14,6 +14,7 @@ typedef struct s_player
 	int		movement[5];
 	int		rotate[2];
 	int		mouse_x;
+	int		as_moved;
 }	t_player;
 
 
