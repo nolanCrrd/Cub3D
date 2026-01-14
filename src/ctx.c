@@ -99,6 +99,6 @@ t_ctx	*init_ctx(char *file_path)
 	}
 	ctx->map->file_path = file_path;
 	ctx->mlx = mlx_init();
-	ctx->lod_value = 4;
+	ctx->lod_value = 3;
 	return (ctx);
 }
