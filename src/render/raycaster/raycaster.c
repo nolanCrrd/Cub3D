@@ -76,13 +76,14 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 		ray->perp_dist = ray->side_dist[Y] - ray->delta[Y];
 }
 
+
 /**
  * @brief Calculate the position of all pixel of the screen and put them
  * into the rneder image
  *
  * @param ctx global context of cub3d
  */
-void	raycaster(t_ctx *ctx)
+void	raycaster(int lod, t_ctx *ctx)
 {
 	static mlx_color	pixels[WIN_H * WIN_W];
 	size_t	raynumber;
@@ -95,7 +96,7 @@ void	raycaster(t_ctx *ctx)
 		set_ray_val(&ray, raynumber, ctx);
 		hit_loop(&ray, ctx);
 		put_vert_pixels(&ray, raynumber, pixels, ctx);
-		raynumber++;
+		raynumber += lod;
 	}
 	mlx_set_image_region(ctx->mlx, ctx->render, 0, 0, WIN_W, WIN_H, pixels);
 }

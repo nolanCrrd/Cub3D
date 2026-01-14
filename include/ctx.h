@@ -14,6 +14,7 @@ typedef struct s_ctx
 	double		old_frame;
 	double		frame;
 	double		frame_time;
+	int			lod_value;
 }	t_ctx;
 
 t_ctx	*init_ctx(char *file_path);

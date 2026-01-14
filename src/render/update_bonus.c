@@ -2,6 +2,7 @@
 #include "mlx.h"
 #include "render.h"
 #include "utils.h"
+#include <stdio.h>
 
 static void	render_door_text(t_ctx *ctx)
 {
@@ -23,11 +24,10 @@ void	update(void *ptr)
 	player_mouse_rotate(ctx);
 	player_move(ctx);
 	player_rotate(ctx);
-	raycaster(ctx);
+	raycaster(ctx->lod_value, ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
 	display_map(ctx);
 	display_rec(ctx);
-	display_border(ctx);
 	render_door_text(ctx);
 }

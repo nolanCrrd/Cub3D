@@ -38,7 +38,7 @@ static void	init_render(t_ctx *ctx)
 int	render_cub3d(t_ctx *ctx)
 {
 	init_render(ctx);
-	raycaster(ctx);
+	raycaster(1, ctx);
 	mlx_loop(ctx->mlx);
 	return (1);
 }
