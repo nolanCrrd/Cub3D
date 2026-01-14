@@ -3,7 +3,6 @@
 #include "player.h"
 #include "render.h"
 #include "utils.h"
-#include <stdio.h>
 
 int	is_player_moved(t_player *player)
 {

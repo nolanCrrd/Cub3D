@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/14 15:31:26 by ehode             #+#    #+#             */
+/*   Updated: 2026/01/14 15:31:33 by ehode            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "ft_printf.h"
 #include "ctx.h"
@@ -18,6 +30,19 @@ int	check_file_extension(t_map *map)
 	return (0);
 }
 
+int	open_map_file(t_ctx *ctx)
+{
+	int	fd;
+
+	fd = open(ctx->map->file_path, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("cub3D");
+		destroy_ctx(&ctx);
+	}
+	return (fd);
+}
+
 t_ctx	*parse(char *file_path)
 {
 	t_ctx	*ctx;
@@ -29,13 +54,9 @@ t_ctx	*parse(char *file_path)
 		destroy_ctx(&ctx);
 		return (NULL);
 	}
-	fd = open(ctx->map->file_path, O_RDONLY);
+	fd = open_map_file(ctx);
 	if (fd == -1)
-	{
-		perror("cub3D");
-		destroy_ctx(&ctx);
 		return (NULL);
-	}
 	if (init_textures(fd, ctx) || init_map(fd, ctx->map)
 		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map))
 	{
@@ -44,7 +65,7 @@ t_ctx	*parse(char *file_path)
 		return (NULL);
 	}
 	close(fd);
-	ctx->map->grid[(size_t)ctx->player->pos[Y]]
-		[(size_t)ctx->player->pos[X]] = '0';
+	ctx->map->grid[(size_t)ctx->player->pos[Y]][(size_t)ctx->player->pos[X]]
+		= '0';
 	return (ctx);
 }

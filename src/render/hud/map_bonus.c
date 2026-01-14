@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_bonus.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 17:08:35 by ehode             #+#    #+#             */
-/*   Updated: 2026/01/13 19:01:23 by ehode            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stddef.h>
 #include "ctx.h"
 #include "render.h"
@@ -40,10 +28,8 @@ static void	draw_wall(t_ctx *ctx)
 					current_offset[Y] + ctx->player->pos[Y]);
 			tmp_pos[X] = MAP_X + (10 * (current_offset[X] + MAP_SIZE));
 			tmp_pos[Y] = MAP_Y + (10 * (current_offset[Y] + MAP_SIZE));
-			if (tile == '1')
+			if (tile == '1' || tile == ' ')
 				draw_square(ctx, tmp_pos, 10, (mlx_color){.rgba = 0xFFFF00FF});
-			else if (tile == ' ')
-				draw_square(ctx, tmp_pos, 10, (mlx_color){.rgba = 0xFFFF00C0});
 			else if (tile == 'D')
 				draw_square(ctx, tmp_pos, 10, (mlx_color){.rgba = 0xFF0000FF});
 			else if (tile == 'O')
