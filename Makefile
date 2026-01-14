@@ -35,14 +35,14 @@ SRCS_RENDER = $(SRC_DIR)render/renderer.c \
 	$(SRC_DIR)render/raycaster/raycaster.c \
 	$(SRC_DIR)render/raycaster/wall_casting.c \
 
-SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer.c \
+SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer_bonus.c \
 	$(SRC_DIR)render/hooks/window_hooks.c \
 	$(SRC_DIR)render/hooks/keydown_hooks.c \
 	$(SRC_DIR)render/hooks/keyup_hooks.c \
 	$(SRC_DIR)render/update_bonus.c \
 	$(SRC_DIR)render/raycaster/raycaster_bonus.c \
 	$(SRC_DIR)render/raycaster/wall_casting_bonus.c \
-	$(SRC_DIR)render/raycaster/floor_casting_bonus.c \
+	$(SRC_DIR)render/raycaster/floor_casting_bonus.c
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/remove_spaces.c \

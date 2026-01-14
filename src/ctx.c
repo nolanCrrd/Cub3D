@@ -6,6 +6,17 @@
 #include <stddef.h>
 #include <stdio.h>
 
+void	destroy_rec(t_ctx *ctx)
+{
+	if (!ctx->rec)
+		return ;
+	mlx_destroy_image(ctx->mlx, ctx->rec[0]);
+	mlx_destroy_image(ctx->mlx, ctx->rec[1]);
+	mlx_destroy_image(ctx->mlx, ctx->rec[2]);
+	free(ctx->rec);
+	ctx->rec = NULL;
+}
+
 void	destroy_textures(t_textures **textures, t_ctx *ctx)
 {
 	if ((*textures)->north && (*textures)->north->texture)
@@ -61,6 +72,7 @@ void	destroy_ctx(t_ctx **ctx)
 	if ((*ctx)->win)
 		mlx_destroy_window((*ctx)->mlx, (*ctx)->win);
 	free((*ctx)->player);
+	destroy_rec(*ctx);
 	free((*ctx));
 	*ctx = NULL;
 }

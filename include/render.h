@@ -25,6 +25,7 @@ void	all_keyup_hooks(int key, void *ptr);
 void	display_map(t_ctx *ctx);
 void	display_border(t_ctx *ctx);
 void	display_rec(t_ctx *ctx);
+void	load_rec(t_ctx *ctx);
 
 // raycaster
 typedef struct s_ray
