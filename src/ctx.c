@@ -2,6 +2,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 #include "map.h"
+#include "mlx.h"
 #include <stddef.h>
 #include <stdio.h>
 
@@ -19,6 +20,15 @@ void	destroy_textures(t_textures **textures, t_ctx *ctx)
 	if ((*textures)->west && (*textures)->west->texture)
 		mlx_destroy_image(ctx->mlx, (*textures)->west->texture);
 	free((*textures)->west);
+	if ((*textures)->ceiling_tex && (*textures)->ceiling_tex->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->ceiling_tex->texture);
+	free((*textures)->ceiling_tex);
+	if ((*textures)->floor_tex && (*textures)->floor_tex->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->floor_tex->texture);
+	free((*textures)->floor_tex);
+	if ((*textures)->door && (*textures)->door->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->door->texture);
+	free((*textures)->door);
 	free((*textures)->ceiling);
 	free((*textures)->floor);
 	free(*textures);
@@ -46,6 +56,10 @@ void	destroy_ctx(t_ctx **ctx)
 {
 	if ((*ctx)->map)
 		destroy_map(&(*ctx)->map, *ctx);
+	if ((*ctx)->render)
+		mlx_destroy_image((*ctx)->mlx, (*ctx)->render);
+	if ((*ctx)->win)
+		mlx_destroy_window((*ctx)->mlx, (*ctx)->win);
 	free((*ctx)->player);
 	free((*ctx));
 	*ctx = NULL;
