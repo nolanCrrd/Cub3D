@@ -15,6 +15,7 @@ SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file_bonus.c \
 	$(SRC_DIR)parsing/parser.c \
 	$(SRC_DIR)parsing/init_textures_bonus.c \
+	$(SRC_DIR)parsing/init_textures_utils_bonus.c \
 	$(SRC_DIR)parsing/init_textures_verif.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \

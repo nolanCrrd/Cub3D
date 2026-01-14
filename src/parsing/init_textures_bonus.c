@@ -9,28 +9,6 @@
 #include <stdlib.h>
 
 /**
- * @brief Return the texture in the struct based based on the given filepath
- *
- * @param path 
- * @param mlx 
- * @return texture with mlx_image / null if not found
- */
-static t_texture	*get_texture(char *path, mlx_context mlx)
-{
-	t_texture	*new_texture;
-
-	new_texture = malloc(sizeof(t_texture));
-	if (new_texture == NULL)
-	{
-		perror("cub3D");
-		return (NULL);
-	}
-	new_texture->texture = mlx_new_image_from_file(mlx,
-			path, &new_texture->width, &new_texture->height);
-	return (new_texture);
-}
-
-/**
  * @brief Create and add the texture to the textures struct at the correct
  * emplacement
  *
@@ -39,27 +17,9 @@ static t_texture	*get_texture(char *path, mlx_context mlx)
  * @param textures 
  * @return 1 if not wll texture / 2 if mlx error / 0 else
  */
-static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
+static int	fill_texture_2(char *line, mlx_context mlx, t_textures *textures)
 {
-	if (line[0] == 'N')
-	{
-		textures->north = get_texture(line + 2, mlx);
-		return ((textures->north == NULL
-				|| textures->north->texture == NULL) * 2);
-	}
-	else if (line[0] == 'S')
-	{
-		textures->south = get_texture(line + 2, mlx);
-		return ((textures->south == NULL
-				|| textures->south->texture == NULL) * 2);
-	}
-	else if (line[0] == 'E')
-	{
-		textures->east = get_texture(line + 2, mlx);
-		return ((textures->east == NULL
-				|| textures->east->texture == NULL) * 2);
-	}
-	else if (line[0] == 'W')
+	if (line[0] == 'W')
 	{
 		textures->west = get_texture(line + 2, mlx);
 		return ((textures->west == NULL
@@ -84,6 +44,41 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 				|| textures->ceiling_tex->texture == NULL) * 2);
 	}
 	return (1);
+}
+
+/**
+ * @brief Create and add the texture to the textures struct at the correct
+ * emplacement
+ *
+ * @param line 
+ * @param mlx 
+ * @param textures 
+ * @return 1 if not wll texture / 2 if mlx error / 0 else
+ */
+static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
+{
+	int	res;
+
+	if (line[0] == 'N')
+	{
+		textures->north = get_texture(line + 2, mlx);
+		return ((textures->north == NULL
+				|| textures->north->texture == NULL) * 2);
+	}
+	else if (line[0] == 'S')
+	{
+		textures->south = get_texture(line + 2, mlx);
+		return ((textures->south == NULL
+				|| textures->south->texture == NULL) * 2);
+	}
+	else if (line[0] == 'E')
+	{
+		textures->east = get_texture(line + 2, mlx);
+		return ((textures->east == NULL
+				|| textures->east->texture == NULL) * 2);
+	}
+	res = fill_texture_2(line, mlx, textures);
+	return (res);
 }
 
 /**
