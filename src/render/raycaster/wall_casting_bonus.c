@@ -1,5 +1,6 @@
 #include "render.h"
 #include "math.h"
+#include <stdio.h>
 
 /**
  * @brief Return the correct texture based on the direction that the wall was hit
@@ -31,7 +32,7 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
  * @param pixels Array WIN_H x WIN_W
  * @param ctx 
  */
-void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
+void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {
 	t_texture			*texture;
 	double				wall_x;
@@ -41,9 +42,10 @@ void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 	double				step_y;
 	double				tex_pos;
 	int					draw_y;
+	int					i;
 
 	line_height = (int)(WIN_H / ray->perp_dist);
-	start = -line_height / 2 + WIN_H / 2;
+	start = -line_height * 0.5 + WIN_H * 0.5;
 
 	texture = get_correct_texture(ray, ctx);
 	if (ray->side_hit == 0)
@@ -68,12 +70,17 @@ void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx)
 	{
 		tex[Y] = fmin((int)tex_pos, texture->height - 1);
 		tex_pos += step_y;
-		pixels[draw_y * WIN_W + raynumber] = mlx_get_image_pixel(ctx->mlx, texture->texture, tex[X], tex[Y]);
-		if (ray->side_hit == 1)
+		i = 0;
+		while (i < lod)
 		{
-			pixels[draw_y * WIN_W + raynumber].r *= 0.8;
-			pixels[draw_y * WIN_W + raynumber].g *= 0.8;
-			pixels[draw_y * WIN_W + raynumber].b *= 0.8;
+			pixels[draw_y * WIN_W + ray->number + i] = mlx_get_image_pixel(ctx->mlx, texture->texture, tex[X], tex[Y]);
+			if (ray->side_hit == 1)
+			{
+				pixels[draw_y * WIN_W + ray->number + i].r *= 0.8;
+				pixels[draw_y * WIN_W + ray->number + i].g *= 0.8;
+				pixels[draw_y * WIN_W + ray->number + i].b *= 0.8;
+			}
+			i++;
 		}
 		draw_y++;
 	}

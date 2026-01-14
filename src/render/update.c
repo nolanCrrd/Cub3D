@@ -23,7 +23,7 @@ void	update(void *ptr)
 	player_move(ctx);
 	player_rotate(ctx);
 	if (is_player_moved(ctx->player))
-		raycaster(ctx);
+		raycaster(1, ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
 }

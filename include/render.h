@@ -25,6 +25,7 @@ void	all_keyup_hooks(int key, void *ptr);
 void	display_map(t_ctx *ctx);
 void	display_border(t_ctx *ctx);
 void	display_rec(t_ctx *ctx);
+void	load_rec(t_ctx *ctx);
 
 // raycaster
 typedef struct s_ray
@@ -40,10 +41,11 @@ typedef struct s_ray
 	int		map[2];
 	int		hit;
 	int		side_hit;
+	int		number;
 }	t_ray;
 
-void	raycaster(t_ctx *ctx);
-void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx);
-void	put_vert_pixels(t_ray *ray, int raynumber, mlx_color *pixels, t_ctx *ctx);
+void	raycaster(int lod, t_ctx *ctx);
+void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
+void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 
 #endif

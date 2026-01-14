@@ -84,4 +84,10 @@ void	all_keydown_hooks(int key, void *ptr)
 	open_door(key, ctx);
 	if (key == KEY_ESC)
 		mlx_loop_end(ctx->mlx);
+	if (key == KEY_PLUS)
+		ctx->lod_value++;
+	if (key == KEY_MINUS)
+		ctx->lod_value--;
+	if (ctx->lod_value < 1)
+		ctx->lod_value = 1;
 }

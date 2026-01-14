@@ -32,6 +32,7 @@ static void	init_render(t_ctx *ctx)
 	ctx->frame = tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0;
 	ctx->old_frame = ctx->frame;
 	ctx->render = mlx_new_image(ctx->mlx, WIN_W, WIN_H);
+	load_rec(ctx);
 	mlx_set_font_scale(ctx->mlx, "default", 24);
 }
 

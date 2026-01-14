@@ -10,7 +10,7 @@
  * @param pixels Array of mlx_color (WIN_W x WIN_H)
  * @param ctx 
  */
-void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx)
+void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {
 	float	floor_step[2];
 	float	floor[2];
@@ -21,6 +21,7 @@ void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx)
 	int		floor_tex[2];
 	int		ceil_tex[2];
 	int		p;
+	int		i;
 
 	current[Y] = WIN_H * 0.5 + 1;
 	ray->ray_dir0[X] = ctx->player->dir_vec[X] - ctx->player->plane[X];
@@ -49,12 +50,19 @@ void	put_f_c_pixels(t_ray *ray, mlx_color *pixels, t_ctx *ctx)
 				,(ctx->map->textures->ceiling_tex->height - 1));
 			floor[X] += floor_step[X];
 			floor[Y] += floor_step[Y];
-			pixels[WIN_W * current[Y] + current[X]] = mlx_get_image_pixel(ctx->mlx, 
-				ctx->map->textures->floor_tex->texture, floor_tex[X], floor_tex[Y]);
-			pixels[WIN_W * (WIN_H - current[Y] - 1) + current[X]] = mlx_get_image_pixel(ctx->mlx, 
-				ctx->map->textures->ceiling_tex->texture, ceil_tex[X], ceil_tex[Y]);
+			i = 0;
+			while (i < lod)
+			{
+				if (WIN_W * (current[Y] + i) + current[X] <= WIN_H * WIN_W)
+					pixels[WIN_W * (current[Y] + i) + current[X]] = mlx_get_image_pixel(ctx->mlx, 
+						ctx->map->textures->floor_tex->texture, floor_tex[X], floor_tex[Y]);
+				if (WIN_W * (WIN_H - current[Y] - 1 + i) + current[X] <= WIN_H * WIN_W)
+					pixels[WIN_W * (WIN_H - current[Y] - 1 + i) + current[X]] = mlx_get_image_pixel(ctx->mlx, 
+						ctx->map->textures->ceiling_tex->texture, ceil_tex[X], ceil_tex[Y]);
+				i++;
+			}
 			current[X]++;
 		}
-		current[Y]++;
+		current[Y] += lod;
 	}
 }

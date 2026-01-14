@@ -41,6 +41,7 @@ void	set_ray_val(t_ray *ray, int raynumber, t_ctx *ctx)
 	else
 		ray->side_dist[Y] = (ray->map[Y] + 1 - ctx->player->pos[Y])
 			* ray->delta[Y];
+	ray->number = raynumber;
 }
 
 /**
@@ -82,21 +83,21 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
  *
  * @param ctx global context of cub3d
  */
-void	raycaster(t_ctx *ctx)
+void	raycaster(int lod, t_ctx *ctx)
 {
 	static mlx_color	pixels[WIN_H * WIN_W];
 	size_t	raynumber;
 	t_ray	ray;
 
 	raynumber = 0;
-	put_f_c_pixels(&ray, pixels, ctx);
+	put_f_c_pixels(&ray, lod, pixels, ctx);
 	while (raynumber < WIN_W)
 	{
 		ft_bzero(&ray, sizeof(t_ray));
 		set_ray_val(&ray, raynumber, ctx);
 		hit_loop(&ray, ctx);
-		put_vert_pixels(&ray, raynumber, pixels, ctx);
-		raynumber++;
+		put_vert_pixels(&ray, lod, pixels, ctx);
+		raynumber += lod;
 	}
 	mlx_set_image_region(ctx->mlx, ctx->render, 0, 0, WIN_W, WIN_H, pixels);
 }
