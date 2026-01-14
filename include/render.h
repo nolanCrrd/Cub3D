@@ -43,6 +43,33 @@ typedef struct s_ray
 	int		number;
 }	t_ray;
 
+typedef struct	s_wall_picker
+{
+	t_texture	*texture;
+	double		wall_x;
+	int			tex[2];
+	int			line_height;
+	int			start;
+	double		step_y;
+	double		tex_pos;
+	int			draw_y;
+	int			lod_counter;
+}	t_wall_picker;
+
+typedef struct	s_floor_picker
+{
+	float	floor_step[2];
+	float	floor[2];
+	float	posZ;
+	float	raw_distance;
+	int		cell[2];
+	int		current[2];
+	int		floor_tex[2];
+	int		ceil_tex[2];
+	int		p;
+	int		lod_counter;
+}	t_floor_picker;
+
 void	raycaster(int lod, t_ctx *ctx);
 void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);

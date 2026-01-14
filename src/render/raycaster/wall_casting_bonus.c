@@ -1,6 +1,7 @@
+#include "ctx.h"
+#include "mlx.h"
 #include "render.h"
 #include "math.h"
-#include <stdio.h>
 
 /**
  * @brief Return the correct texture based on the direction that the wall was hit
@@ -24,6 +25,43 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	return (ctx->map->textures->east);
 }
 
+static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
+{
+	picker->line_height = (int)(WIN_H / ray->perp_dist);
+	picker->start = -picker->line_height * 0.5 + WIN_H * 0.5;
+	picker->texture = get_correct_texture(ray, ctx);
+	if (ray->side_hit == 0)
+		picker->wall_x = ctx->player->pos[Y] + ray->perp_dist * ray->ray_dir[Y];
+	else
+		picker->wall_x = ctx->player->pos[X] + ray->perp_dist * ray->ray_dir[X];
+	picker->wall_x -= floor(picker->wall_x);
+	picker->tex[X] = picker->wall_x * picker->texture->width;
+	if ((ray->side_hit == 0 && ray->ray_dir[X] < 0))
+		picker->tex[X] = picker->texture->width - picker->tex[X] - 1;
+	if ((ray->side_hit == 1 && ray->ray_dir[Y] > 0))
+		picker->tex[X] = picker->texture->width - picker->tex[X] - 1;
+	picker->step_y = 1.0 * picker->texture->height / picker->line_height;
+	picker->tex_pos = ((picker->start >= 0) * picker->start
+			- WIN_H * 0.5 + picker->line_height * 0.5) * picker->step_y;
+	picker->start = picker->start * (picker->start >= 0);
+	picker->draw_y = picker->start;
+	if (picker->line_height > WIN_H)
+		picker->line_height = WIN_H;
+}
+
+static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)
+{
+	if (ray->side_hit == 1)
+	{
+		pixels[picker.draw_y * WIN_W + ray->number + picker.lod_counter]
+			.r *= 0.8;
+		pixels[picker.draw_y * WIN_W + ray->number + picker.lod_counter]
+			.g *= 0.8;
+		pixels[picker.draw_y * WIN_W + ray->number + picker.lod_counter]
+			.b *= 0.8;
+	}
+}
+
 /**
  * @brief Put the wall pixels into the pixels array
  *
@@ -34,54 +72,22 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
  */
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {
-	t_texture			*texture;
-	double				wall_x;
-	int					tex[2];
-	int					line_height;
-	int					start;
-	double				step_y;
-	double				tex_pos;
-	int					draw_y;
-	int					i;
+	t_wall_picker	picker;
 
-	line_height = (int)(WIN_H / ray->perp_dist);
-	start = -line_height * 0.5 + WIN_H * 0.5;
-
-	texture = get_correct_texture(ray, ctx);
-	if (ray->side_hit == 0)
-		wall_x = ctx->player->pos[Y] + ray->perp_dist * ray->ray_dir[Y];
-	else
-		wall_x = ctx->player->pos[X] + ray->perp_dist * ray->ray_dir[X];
-	wall_x -= floor(wall_x);
-
-	tex[X] = wall_x * texture->width;
-	if ((ray->side_hit == 0 && ray->ray_dir[X] < 0))
-		tex[X] = texture->width - tex[X] - 1;
-	if ((ray->side_hit == 1 && ray->ray_dir[Y] > 0))
-		tex[X] = texture->width - tex[X] - 1;
-
-	step_y = 1.0 * texture->height / line_height;
-	tex_pos = ((start >= 0) * start - WIN_H / 2.0 + line_height / 2.0) * step_y;
-	start = start * (start >= 0);
-	draw_y = start;
-	if (line_height > WIN_H)
-		line_height = WIN_H;
-	while (draw_y < start + line_height)
+	picker_init(&picker, ray, ctx);
+	while (picker.draw_y < picker.start + picker.line_height)
 	{
-		tex[Y] = fmin((int)tex_pos, texture->height - 1);
-		tex_pos += step_y;
-		i = 0;
-		while (i < lod)
+		picker.tex[Y] = fmin((int)picker.tex_pos, picker.texture->height - 1);
+		picker.tex_pos += picker.step_y;
+		picker.lod_counter = 0;
+		while (picker.lod_counter < lod)
 		{
-			pixels[draw_y * WIN_W + ray->number + i] = mlx_get_image_pixel(ctx->mlx, texture->texture, tex[X], tex[Y]);
-			if (ray->side_hit == 1)
-			{
-				pixels[draw_y * WIN_W + ray->number + i].r *= 0.8;
-				pixels[draw_y * WIN_W + ray->number + i].g *= 0.8;
-				pixels[draw_y * WIN_W + ray->number + i].b *= 0.8;
-			}
-			i++;
+			pixels[picker.draw_y * WIN_W + ray->number + picker.lod_counter]
+				= mlx_get_image_pixel(ctx->mlx,
+					picker.texture->texture, picker.tex[X], picker.tex[Y]);
+			darker_color(picker, ray, pixels);
+			picker.lod_counter++;
 		}
-		draw_y++;
+		picker.draw_y++;
 	}
 }
