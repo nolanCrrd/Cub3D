@@ -14,7 +14,6 @@
 #include "ft_printf.h"
 #include "map.h"
 #include "player.h"
-#include "calc.h"
 #include <math.h>
 
 /**
@@ -73,9 +72,9 @@ static void	init_direction(t_map *map, t_player *player)
 		player->dir_a = 0;
 	else
 		player->dir_a = 180;
-	player->dir_vec[X] = cos(RAD(player->dir_a));
-	player->dir_vec[Y] = sin(RAD(player->dir_a));
-	plane_length = tan(RAD(60) / 2.0);
+	player->dir_vec[X] = cos(player->dir_a * M_PI / 180);
+	player->dir_vec[Y] = sin(player->dir_a * M_PI / 180);
+	plane_length = tan(70.0 * M_PI / 180 / 2.0);
 	player->plane[X] = -player->dir_vec[Y] * plane_length;
 	player->plane[Y] = player->dir_vec[X] * plane_length;
 }
