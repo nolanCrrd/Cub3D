@@ -39,7 +39,8 @@ static int	as_moved(t_player *player)
 
 void	update(void *ptr)
 {
-	t_ctx	*ctx;
+	t_ctx		*ctx;
+	static int	idle_frame = 0;;
 
 	ctx = (t_ctx *)ptr;
 	ctx->old_frame = ctx->frame;
@@ -48,9 +49,10 @@ void	update(void *ptr)
 	player_move(ctx);
 	player_rotate(ctx);
 	ctx->player->as_moved = ctx->player->as_moved || as_moved(ctx->player);
-	if (ctx->player->as_moved)
+	idle_frame = !ctx->player->as_moved * (idle_frame + 1);
+	if (idle_frame == 0)
 		raycaster(ctx->lod_value, ctx);
-	else
+	else if (idle_frame == 1)
 		raycaster(1, ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
