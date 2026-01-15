@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:39:29 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 16:48:36 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:46:37 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static int	check_map(int fd, t_map *map)
 	{
 		if (is_blank(line))
 		{
+			free(line);
 			ft_dprintf(2, "Error\nEmpty line in map\n");
 			return (1);
 		}
