@@ -1,6 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:25 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "math.h"
 
+/**
+ * @brief Make the player and the camera plane rotate together based on
+ * rotation speed
+ *
+ * @param dir player direction vector
+ * @param plane camera plane direction vector
+ * @param r_speed rotation speed
+ */
 void	rotate_dir(double *dir, double *plane, double r_speed)
 {
 	double	old_dir[2];
@@ -20,6 +40,11 @@ void	rotate_dir(double *dir, double *plane, double r_speed)
 		+ old_plane[Y] * cos(r_speed);
 }
 
+/**
+ * @brief Make the player rotate if arrow key pressed
+ *
+ * @param ctx global context of cub3d
+ */
 void	player_rotate(t_ctx *ctx)
 {
 	double	rotate_speed;

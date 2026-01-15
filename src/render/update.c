@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 11:04:50 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 11:05:09 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "mlx.h"
 #include "player.h"
 #include "render.h"
 #include "utils.h"
 
-int	is_player_moved(t_player *player)
+static int	as_moved(t_player *player)
 {
 	return (
-		player->movement[0] || player->movement[1]
-		|| player->movement[2] || player->movement[3]
-		|| player->rotate[0] || player->rotate[1]
+		player->movement[0] || player->movement[1] || player->movement[2]
+		|| player->movement[3] || player->rotate[0] || player->rotate[1]
 	);
 }
 
@@ -22,7 +33,7 @@ void	update(void *ptr)
 	refresh_frame_time(ctx);
 	player_move(ctx);
 	player_rotate(ctx);
-	if (is_player_moved(ctx->player))
+	if (as_moved(ctx->player))
 		raycaster(1, ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);

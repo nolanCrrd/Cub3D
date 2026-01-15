@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:39 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "ft_printf.h"
 #include "map.h"
@@ -12,7 +24,7 @@
  * @brief Create and add the texture to the textures struct at the correct
  * emplacement
  *
- * @param line 
+ * @param
  * @param mlx 
  * @param textures 
  * @return 1 if not wll texture / 2 if mlx error / 0 else
@@ -81,38 +93,6 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 	return (res);
 }
 
-/**
- * @brief Fill the color into textures struct at the correct emplacement
- *
- * @param color 
- * @param textures 
- * @return 1 if error / 0 else
- */
-static int	fill_color(char *color, t_textures *textures)
-{
-	mlx_color	*new_color;
-	int			is_floor;
-
-	new_color = malloc(sizeof(mlx_color));
-	if (!new_color || !*color || !is_valid_rgb(color))
-	{
-		free(new_color);
-		return (1);
-	}
-	is_floor = color[0] == 'F';
-	new_color->r = ft_atoi(color + 1, NULL);
-	color = ft_strchr(color, ',') + 1;
-	new_color->g = ft_atoi(color, NULL);
-	color = ft_strchr(color, ',') + 1;
-	new_color->b = ft_atoi(color, NULL);
-	new_color->a = 0xFF;
-	if (is_floor)
-		textures->floor = new_color;
-	else
-		textures->ceiling = new_color;
-	return (0);
-}
-
 static int	fill_all(char *line, t_ctx *ctx)
 {
 	int	err_text_code;
@@ -120,12 +100,9 @@ static int	fill_all(char *line, t_ctx *ctx)
 	err_text_code = fill_texture(line, ctx->mlx, ctx->map->textures);
 	if (err_text_code == 1)
 	{
-		if (fill_color(line, ctx->map->textures))
-		{
-			free(line);
-			ft_dprintf(2, "cub3D: Color not respect rgb format\n");
-			return (1);
-		}
+		free(line);
+		ft_dprintf(2, "cub3D: Invalid texture\n");
+		return (1);
 	}
 	else if (err_text_code == 2)
 	{

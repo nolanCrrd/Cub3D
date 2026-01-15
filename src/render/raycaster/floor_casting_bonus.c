@@ -1,8 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floor_casting_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:55:32 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:55:37 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "mlx.h"
 #include "render.h"
 #include <math.h>
 
+/**
+ * @brief Init all the data for Y loop to pick up the correct texture pixel
+ *
+ * @param picker picker to fill
+ * @param ray ray information
+ * @param ctx global cub3d context
+ */
 static void	init_y_picker(t_floor_picker *picker, t_ray *ray, t_ctx *ctx)
 {
 	picker->p = picker->current[Y] - WIN_H * 0.5;
@@ -18,6 +37,12 @@ static void	init_y_picker(t_floor_picker *picker, t_ray *ray, t_ctx *ctx)
 	picker->current[X] = 0;
 }
 
+/**
+ * @brief Init all the data of X loop to pick up the correct texture pixel
+ *
+ * @param picker picker to fill
+ * @param ctx global cub3d context
+ */
 static void	init_x_picker(t_floor_picker *picker, t_ctx *ctx)
 {
 	picker->cell[X] = picker->floor[X];
@@ -43,6 +68,14 @@ static void	init_x_picker(t_floor_picker *picker, t_ctx *ctx)
 	picker->lod_counter = 0;
 }
 
+/**
+ * @brief Draw multiple time the same pixel based on the LOD level
+ *
+ * @param picker texture picker data
+ * @param lod LOD level (number of simplified pixels)
+ * @param pixels array that contain all the screen mlx_color
+ * @param ctx global cub3d context
+ */
 static void	lod_loop(t_floor_picker *picker, int lod,
 	mlx_color *pixels, t_ctx *ctx)
 {
@@ -66,11 +99,13 @@ static void	lod_loop(t_floor_picker *picker, int lod,
 }
 
 /**
- * @brief Put all the pixel of the floor and the celling into pixels array
+ * @brief Put into the pixel array all the texture of floor and
+ * celling with an LOD level
  *
- * @param ray 
- * @param pixels Array of mlx_color (WIN_W x WIN_H)
- * @param ctx 
+ * @param ray current ray
+ * @param lod LOD level (number of simplified pixels)
+ * @param pixels pixels array mlx_color of all the screen
+ * @param ctx global cub3d context
  */
 void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {

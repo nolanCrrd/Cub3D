@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_casting_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 11:03:34 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 11:03:44 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "mlx.h"
 #include "render.h"
@@ -25,6 +37,13 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	return (ctx->map->textures->east);
 }
 
+/**
+ * @brief Init all the texture picker information
+ *
+ * @param picker picker to fill
+ * @param ray current ray
+ * @param ctx global cub3d data
+ */
 static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 {
 	picker->line_height = (int)(WIN_H / ray->perp_dist);
@@ -49,6 +68,13 @@ static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 		picker->line_height = WIN_H;
 }
 
+/**
+ * @brief Make the wall texture darker if it's a Y wall
+ *
+ * @param picker texture picker
+ * @param ray current ray
+ * @param pixels pixel array (that already contain the texture pixel)
+ */
 static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)
 {
 	if (ray->side_hit == 1)
@@ -66,9 +92,9 @@ static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)
  * @brief Put the wall pixels into the pixels array
  *
  * @param ray
- * @param raynumber X represented by the ray
+ * @param lod LOD level (how many x 1 ray represent)
  * @param pixels Array WIN_H x WIN_W
- * @param ctx 
+ * @param ctx gloab cub3d context
  */
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {

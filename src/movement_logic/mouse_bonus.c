@@ -1,8 +1,24 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouse_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:21 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "render.h"
 #include "mlx.h"
 #include "ctx.h"
 
+/**
+ * @brief Rotete the player based on his mouse movement
+ *
+ * @param ctx global context of cub3d
+ */
 void	player_mouse_rotate(t_ctx *ctx)
 {
 	int	mouse_y;

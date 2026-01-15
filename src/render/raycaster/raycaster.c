@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:55:30 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 11:03:44 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "map.h"
 #include "mlx.h"
@@ -77,11 +89,11 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 		ray->perp_dist = ray->side_dist[Y] - ray->delta[Y];
 }
 
-
 /**
  * @brief Calculate the position of all pixel of the screen and put them
  * into the rneder image
  *
+ * @param lod LOD level (number of pixel that 1 ray represent)
  * @param ctx global context of cub3d
  */
 void	raycaster(int lod, t_ctx *ctx)

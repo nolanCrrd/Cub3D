@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:31:26 by ehode             #+#    #+#             */
-/*   Updated: 2026/01/14 15:31:33 by ehode            ###   ########.fr       */
+/*   Updated: 2026/01/15 10:47:30 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int	open_map_file(t_ctx *ctx)
 	return (fd);
 }
 
+/**
+ * @brief Return the global context of cub3d with initialised map
+ *
+ * @param file_path map file path
+ * @return NULL if error / allocated context else
+ * */
 t_ctx	*parse(char *file_path)
 {
 	t_ctx	*ctx;

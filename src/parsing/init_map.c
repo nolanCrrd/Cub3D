@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:31 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -8,6 +20,12 @@
 #include "libft.h"
 #include "map.h"
 
+/**
+ * @brief Allocate the map grid
+ *
+ * @param map map where allocate the grid
+ * @return 0 if sucess / 0 else
+ */
 static int	init_grid(t_map *map)
 {
 	size_t	i;
@@ -31,6 +49,12 @@ static int	init_grid(t_map *map)
 	return (0);
 }
 
+/**
+ * @brief Fill all the map grid with the file data
+ *
+ * @param map map where grid is stored
+ * @param fd reference file
+ */
 static void	fill_grid(t_map *map, int fd)
 {
 	char	*line;

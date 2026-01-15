@@ -1,6 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:23 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "libft.h"
 
+/**
+ * @brief Make the player move on strafe side
+ *
+ * @param walkable charset that contain all map accessible char
+ * @param move_speed player move_speed (based on the frame_time)
+ * @param ctx global context of cub3d
+ */
 static void	player_strafe(char *walkable, double move_speed, t_ctx *ctx)
 {
 	if (ctx->player->movement[2] && !ctx->player->movement[3])
@@ -26,7 +45,11 @@ static void	player_strafe(char *walkable, double move_speed, t_ctx *ctx)
 	}
 }
 
-// TODO: Probleme de colision chelou
+/**
+ * @brief Make the player move in all direction
+ *
+ * @param ctx global cub3d context
+ */
 void	player_move(t_ctx *ctx)
 {
 	double		m_s;

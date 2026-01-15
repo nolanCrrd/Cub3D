@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:37 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "ft_printf.h"
 #include "map.h"
@@ -34,9 +46,9 @@ t_texture	*get_texture(char *path, mlx_context mlx)
  * @brief Create and add the texture to the textures struct at the correct
  * emplacement
  *
- * @param line 
- * @param mlx 
- * @param textures 
+ * @param line line where is the texture path
+ * @param mlx global mlx context
+ * @param textures struct that will contain all the game textures
  * @return 1 if not wll texture / 2 if mlx error / 0 else
  */
 static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
@@ -71,8 +83,8 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 /**
  * @brief Fill the color into textures struct at the correct emplacement
  *
- * @param color 
- * @param textures 
+ * @param color line that contain the rgb information
+ * @param textures struct that contain all the game textures
  * @return 1 if error / 0 else
  */
 static int	fill_color(char *color, t_textures *textures)
@@ -100,6 +112,14 @@ static int	fill_color(char *color, t_textures *textures)
 	return (0);
 }
 
+/**
+ * @brief Fill all the map texture based if itś rgb code
+ * or tyexture's path
+ *
+ * @param line 
+ * @param ctx 
+ * @return 
+ */
 static int	fill_all(char *line, t_ctx *ctx)
 {
 	int	err_text_code;
@@ -124,10 +144,10 @@ static int	fill_all(char *line, t_ctx *ctx)
 }
 
 /**
- * @brief Init all the texture (wall and floor)
+ * @brief Init all the texture (wall)
  *
- * @param fd 
- * @param ctx 
+ * @param fd file where texture are indicated
+ * @param ctx global cub3d context
  * @return 1 if loading error / 0 else
  */
 int	init_textures(int fd, t_ctx *ctx)

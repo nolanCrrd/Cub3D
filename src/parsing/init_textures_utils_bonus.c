@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:41 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map.h"
 #include "parsing.h"
 #include "mlx.h"
@@ -5,10 +17,11 @@
 #include <stdlib.h>
 
 /**
- * @brief Return the texture in the struct based based on the given filepath
+ * @brief Return the texture in the struct based based on the
+ * given filepath
  *
- * @param path 
- * @param mlx 
+ * @param path path to file
+ * @param mlx global mlx mlx_context
  * @return texture with mlx_image / null if not found
  */
 t_texture	*get_texture(char *path, mlx_context mlx)

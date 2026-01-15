@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_casting.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 11:03:36 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 11:03:44 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "render.h"
 #include "math.h"
 
@@ -21,6 +33,13 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	return (ctx->map->textures->east);
 }
 
+/**
+ * @brief Init all the texture picker information
+ *
+ * @param picker picker to fill
+ * @param ray current ray
+ * @param ctx global cub3d data
+ */
 static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 {
 	picker->line_height = (int)(WIN_H / ray->perp_dist);
@@ -43,6 +62,13 @@ static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 	picker->lod_counter = 0;
 }
 
+/**
+ * @brief Make the wall texture darker if it's a Y wall
+ *
+ * @param picker texture picker
+ * @param ray current ray
+ * @param pixels pixel array (that already contain the texture pixel)
+ */
 static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)
 {
 	if (ray->side_hit == 1)

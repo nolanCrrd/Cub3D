@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:46 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:47:30 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,6 +68,12 @@ int	check_map_character(t_map *map)
 	return (0);
 }
 
+/**
+ * @brief Return a boolean if the map is valid and playable
+ *
+ * @param map 
+ * @return 1 if not and 0 if yes
+ */
 int	is_valid_map(t_map *map)
 {
 	if (!is_playable(map))

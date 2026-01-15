@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:27 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,9 +62,9 @@ static int	is_valid_texture(char *line, char **already_seen)
 /**
  * @brief Check if the config file contain all the needed textures
  *
- * @param fd 
- * @param already_seen 
- * @return 
+ * @param fd map file to check
+ * @param already_seen array that contain all seen textures
+ * @return 0 if texture loaded / 1 if error in file
  */
 static int	check_textures(int fd, char **already_seen)
 {
@@ -84,11 +96,11 @@ static int	check_textures(int fd, char **already_seen)
  * @brief Check if the file contain a map without empty line in
  * and it's store the size of the map into the strcut
  *
- * @param fd 
- * @param map 
- * @return 
+ * @param fd map file to check
+ * @param map all map data
+ * @return 0 if map is valid / 0 else
  */
-int	check_map(int fd, t_map *map)
+static int	check_map(int fd, t_map *map)
 {
 	char	*line;
 	int		x_max;
@@ -115,6 +127,12 @@ int	check_map(int fd, t_map *map)
 	return (0);
 }
 
+/**
+ * @brief Check all the map file
+ *
+ * @param map map structure
+ * @return 0 if map is valide / 1 else
+ */
 int	check_file(t_map *map)
 {
 	char	**already_seen;

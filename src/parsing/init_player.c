@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 10:39:33 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include "ft_printf.h"
 #include "map.h"
@@ -5,6 +17,13 @@
 #include "calc.h"
 #include <math.h>
 
+/**
+ * @brief init the player position based on the map value
+ *
+ * @param map filled map to look in
+ * @param player player where fill data
+ * @return 0 if success / 1 if error
+ */
 static int	init_start_position(t_map *map, t_player *player)
 {
 	size_t	cr_x;
@@ -34,6 +53,12 @@ static int	init_start_position(t_map *map, t_player *player)
 	return (player->pos[X] == -1);
 }
 
+/**
+ * @brief Init the player direction angle and vector
+ *
+ * @param map map to check the initial player direction
+ * @param player player where fill the value
+ */
 static void	init_direction(t_map *map, t_player *player)
 {
 	char	direction_type;
@@ -55,6 +80,13 @@ static void	init_direction(t_map *map, t_player *player)
 	player->plane[Y] = player->dir_vec[X] * plane_length;
 }
 
+/**
+ * @brief Init all the player information
+ *
+ * @param map reference map
+ * @param player player where fill data
+ * @return 0 if succes / 1 if error
+ */
 int	init_player(t_map *map, t_player *player)
 {
 	player->pos[X] = -1;

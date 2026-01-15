@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   renderer_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 11:04:40 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 11:04:48 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "mlx.h"
 #include "render.h"
@@ -36,6 +48,12 @@ static void	init_render(t_ctx *ctx)
 	mlx_set_font_scale(ctx->mlx, "default", 24);
 }
 
+/**
+ * @brief Start the game loop of cub3d
+ *
+ * @param ctx global cub3d context already init
+ * @return 1 if success
+ */
 int	render_cub3d(t_ctx *ctx)
 {
 	init_render(ctx);
