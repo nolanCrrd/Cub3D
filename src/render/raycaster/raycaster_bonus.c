@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:03:38 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 11:03:44 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:38:23 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,21 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 		ray->perp_dist = ray->side_dist[Y] - ray->delta[Y];
 }
 
+static void	fill_z_buffer(int lod, t_ray *ray, double *buffer)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = ray->number + i;
+	while (i < lod && index < WIN_W)
+	{
+		buffer[index] = ray->perp_dist;
+		i++;
+		index++;
+	}
+}
+
 /**
  * @brief Calculate the position of all pixel of the screen and put them
  * into the rneder image
@@ -100,6 +115,7 @@ void	hit_loop(t_ray *ray, t_ctx *ctx)
 void	raycaster(int lod, t_ctx *ctx)
 {
 	static mlx_color	pixels[WIN_H * WIN_W];
+	static double		z_buffer[WIN_W];
 	size_t				raynumber;
 	t_ray				ray;
 
@@ -111,7 +127,9 @@ void	raycaster(int lod, t_ctx *ctx)
 		set_ray_val(&ray, raynumber, ctx);
 		hit_loop(&ray, ctx);
 		put_vert_pixels(&ray, lod, pixels, ctx);
+		fill_z_buffer(lod, &ray, z_buffer);
 		raynumber += lod;
 	}
+	ennemy_casting(z_buffer, lod, pixels, ctx);
 	mlx_set_image_region(ctx->mlx, ctx->render, 0, 0, WIN_W, WIN_H, pixels);
 }

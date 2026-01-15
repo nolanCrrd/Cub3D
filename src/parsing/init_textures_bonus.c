@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:39:39 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:52:05 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ static int	fill_texture(char *line, mlx_context mlx, t_textures *textures)
 		return ((textures->east == NULL
 				|| textures->east->texture == NULL) * 2);
 	}
+	else if (line[0] == 'M')
+	{
+		textures->ennemy = get_texture(line + 1, mlx);
+		return ((textures->ennemy == NULL
+				|| textures->ennemy->texture == NULL) * 1);
+	}
 	res = fill_texture_2(line, mlx, textures);
 	return (res);
 }
@@ -132,7 +138,7 @@ int	init_textures(int fd, t_ctx *ctx)
 		return (1);
 	}
 	loaded_texture = 0;
-	while (loaded_texture++ < 7)
+	while (loaded_texture++ < 8)
 	{
 		line = skip_empty_lines(fd);
 		remove_spaces(line);

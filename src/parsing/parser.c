@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:31:26 by ehode             #+#    #+#             */
-/*   Updated: 2026/01/15 15:40:24 by ehode            ###   ########.fr       */
+/*   Updated: 2026/01/15 16:43:10 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_ctx	*parse(char *file_path)
 	if (fd == -1)
 		return (NULL);
 	if (init_textures(fd, ctx) || init_map(fd, ctx->map)
-		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map))
+		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map)
+		|| init_ennemy(ctx->map, ctx->ennemy))
 	{
 		finish_get_next_line(fd);
 		close(fd);

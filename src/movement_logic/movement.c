@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:39:23 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:55:37 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	player_strafe(char *walkable, double move_speed, t_ctx *ctx)
 void	player_move(t_ctx *ctx)
 {
 	double		m_s;
-	const char	*walkable = "0O";
+	const char	*walkable = "0OM";
 
 	m_s = ctx->frame_time / 1000.0 * ctx->player->speed;
 	if (ctx->player->movement[0] && !ctx->player->movement[1])

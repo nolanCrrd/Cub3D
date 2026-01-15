@@ -10,6 +10,7 @@ SRCS_PARSING = $(SRC_DIR)parsing/check_file.c \
 	$(SRC_DIR)parsing/init_textures_verif.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \
+	$(SRC_DIR)parsing/init_ennemy.c \
 	$(SRC_DIR)parsing/map_checker.c
 
 SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file_bonus.c \
@@ -19,6 +20,7 @@ SRCS_PARSING_BONUS = $(SRC_DIR)parsing/check_file_bonus.c \
 	$(SRC_DIR)parsing/init_textures_verif.c \
 	$(SRC_DIR)parsing/init_map.c \
 	$(SRC_DIR)parsing/init_player.c \
+	$(SRC_DIR)parsing/init_ennemy.c \
 	$(SRC_DIR)parsing/map_checker_bonus.c
 
 SRCS_MOVEMENT = $(SRC_DIR)movement_logic/movement.c \
@@ -26,6 +28,7 @@ SRCS_MOVEMENT = $(SRC_DIR)movement_logic/movement.c \
 
 SRCS_MOVEMENT_BONUS = $(SRC_DIR)movement_logic/movement.c \
 	$(SRC_DIR)movement_logic/rotate.c \
+	$(SRC_DIR)movement_logic/ennemy_movement.c \
 	$(SRC_DIR)movement_logic/mouse_bonus.c
 
 SRCS_RENDER = $(SRC_DIR)render/renderer.c \
@@ -43,6 +46,7 @@ SRCS_RENDER_BONUS = $(SRC_DIR)render/renderer_bonus.c \
 	$(SRC_DIR)render/update_bonus.c \
 	$(SRC_DIR)render/raycaster/raycaster_bonus.c \
 	$(SRC_DIR)render/raycaster/wall_casting_bonus.c \
+	$(SRC_DIR)render/raycaster/ennemy_casting.c \
 	$(SRC_DIR)render/raycaster/floor_casting_bonus.c
 
 SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \

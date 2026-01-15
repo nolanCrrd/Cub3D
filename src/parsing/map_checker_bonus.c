@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:47:23 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 10:47:30 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:54:51 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	is_playable(t_map *map)
 
 int	check_map_character(t_map *map)
 {
-	const char	allowed_character[] = "01 NSEWD";
+	const char	allowed_character[] = "01 NSEWDM";
 	size_t		current_x;
 	size_t		current_y;
 

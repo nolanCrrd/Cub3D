@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:39:29 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 15:41:24 by ehode            ###   ########.fr       */
+/*   Updated: 2026/01/15 16:48:36 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
  */
 static int	is_valid_texture(char *line, char **already_seen)
 {
-	const char	*valid[] = {"NO", "SO", "WE", "EA", "F", "C", "DO", NULL};
+	const char	*valid[] = {"NO", "SO", "WE", "EA", "F", "C", "DO", "M", NULL};
 	size_t		i;
 	size_t		j;
 
@@ -72,7 +72,7 @@ static int	check_textures(int fd, char **already_seen)
 	size_t	i;
 
 	i = 0;
-	while (i < 7)
+	while (i < 8)
 	{
 		line = skip_empty_lines(fd);
 		if (line == NULL)
@@ -145,7 +145,7 @@ int	check_file(t_map *map)
 		perror("cub3D");
 		return (1);
 	}
-	already_seen = ft_calloc(7, sizeof(char *));
+	already_seen = ft_calloc(8, sizeof(char *));
 	if (!already_seen)
 	{
 		perror("cub3D");

@@ -16,6 +16,7 @@
 #include "render.h"
 #include "utils.h"
 #include "libft.h"
+#include <stdio.h>
 
 static void	render_door_text(t_ctx *ctx)
 {
@@ -39,14 +40,20 @@ static int	as_moved(t_player *player)
 
 void	update(void *ptr)
 {
-	t_ctx		*ctx;
+	t_ctx	*ctx;
+	char	*fps;
 
 	ctx = (t_ctx *)ptr;
-	ctx->old_frame = ctx->frame;
+	if (ctx->player->is_dead)
+	{
+		printf("mort\n");
+		mlx_loop_end(ctx->mlx);
+	}
 	refresh_frame_time(ctx);
 	player_mouse_rotate(ctx);
 	player_move(ctx);
 	player_rotate(ctx);
+	ennemy_move(ctx);
 	ctx->player->as_moved = ctx->player->as_moved || as_moved(ctx->player);
 	if (ctx->player->as_moved)
 		raycaster(ctx->lod_value, ctx);
@@ -57,7 +64,11 @@ void	update(void *ptr)
 	display_map(ctx);
 	display_rec(ctx);
 	if (ctx->frame_time > 0)
+	{
+		fps = ft_itoa(1000 / ctx->frame_time);
 		mlx_string_put(ctx->mlx, ctx->win, 20, 35,
-			(mlx_color){.rgba = 0xA10000ff}, ft_itoa(1000 / ctx->frame_time));
+			(mlx_color){.rgba = 0xA10000ff}, fps);
+		free(fps);
+	}
 	render_door_text(ctx);
 }

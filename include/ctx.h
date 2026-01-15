@@ -13,6 +13,7 @@
 #ifndef CTX_H
 # define CTX_H
 
+#include "ennemy.h"
 # include "mlx.h"
 # include "map.h"
 # include "player.h"
@@ -23,6 +24,7 @@ typedef struct s_ctx
 	mlx_window	win;
 	mlx_image	render;
 	t_player	*player;
+	t_ennemy	*ennemy;
 	t_map		*map;
 	double		old_frame;
 	double		frame;

@@ -82,13 +82,13 @@ static void	lod_loop(t_floor_picker *picker, int lod,
 	while (picker->lod_counter < lod)
 	{
 		if (WIN_W * (picker->current[Y] + picker->lod_counter)
-			+ picker->current[X] <= WIN_H * WIN_W)
+			+ picker->current[X] < WIN_H * WIN_W)
 			pixels[WIN_W * (picker->current[Y] + picker->lod_counter)
 				+ picker->current[X]] = mlx_get_image_pixel(ctx->mlx,
 					ctx->map->textures->floor_tex->texture,
 					picker->floor_tex[X], picker->floor_tex[Y]);
 		if (WIN_W * (WIN_H - picker->current[Y] - 1 + picker->lod_counter)
-			+ picker->current[X] <= WIN_H * WIN_W)
+			+ picker->current[X] < WIN_H * WIN_W)
 			pixels[WIN_W * (WIN_H - picker->current[Y] - 1
 					+ picker->lod_counter) + picker->current[X]]
 				= mlx_get_image_pixel(ctx->mlx,

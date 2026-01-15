@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "ctx.h"
+#include "ennemy.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "map.h"
 #include "mlx.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void	destroy_rec(t_ctx *ctx)
 {
@@ -52,6 +54,9 @@ void	destroy_textures(t_textures **textures, t_ctx *ctx)
 	if ((*textures)->door && (*textures)->door->texture)
 		mlx_destroy_image(ctx->mlx, (*textures)->door->texture);
 	free((*textures)->door);
+	if ((*textures)->ennemy && (*textures)->ennemy->texture)
+		mlx_destroy_image(ctx->mlx, (*textures)->ennemy->texture);
+	free((*textures)->ennemy);
 	free((*textures)->ceiling);
 	free((*textures)->floor);
 	free(*textures);
@@ -84,7 +89,9 @@ void	destroy_ctx(t_ctx **ctx)
 	if ((*ctx)->win)
 		mlx_destroy_window((*ctx)->mlx, (*ctx)->win);
 	free((*ctx)->player);
+	free((*ctx)->ennemy);
 	destroy_rec(*ctx);
+	mlx_destroy_context((*ctx)->mlx);
 	free((*ctx));
 	*ctx = NULL;
 }
@@ -101,7 +108,8 @@ t_ctx	*init_ctx(char *file_path)
 	}
 	ctx->map = ft_calloc(1, sizeof(t_map));
 	ctx->player = ft_calloc(1, sizeof(t_player));
-	if (!ctx->map || !ctx->player)
+	ctx->ennemy = ft_calloc(1, sizeof(t_ennemy));
+	if (!ctx->map || !ctx->player || !ctx->ennemy)
 	{
 		ft_dprintf(2, "Error\nUnable to init ctx\n");
 		free(ctx->map);

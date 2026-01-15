@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:07:01 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 13:07:05 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:38:36 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	update(void *ptr);
 
 //hooks
 void	close_hook(int event, void *ptr);
+void	ennemy_move(t_ctx *ctx);
 void	player_move(t_ctx *ctx);
 void	player_rotate(t_ctx *ctx);
 void	player_mouse_rotate(t_ctx *ctx);
@@ -86,5 +87,6 @@ typedef struct s_floor_picker
 void	raycaster(int lod, t_ctx *ctx);
 void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
+void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:06:57 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 13:07:05 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:47:06 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_textures
 	t_texture	*door;
 	t_texture	*ceiling_tex;
 	t_texture	*floor_tex;
+	t_texture	*ennemy;
 	mlx_color	*floor;
 	mlx_color	*ceiling;
 }	t_textures;
