@@ -15,7 +15,7 @@
  * @param mlx 
  * @return texture with mlx_image / null if not found
  */
-static t_texture	*get_texture(char *path, mlx_context mlx)
+t_texture	*get_texture(char *path, mlx_context mlx)
 {
 	t_texture	*new_texture;
 

@@ -40,6 +40,7 @@ static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 	picker->tex_pos = ((picker->start >= 0) * picker->start - WIN_H
 			* 0.5 + picker->line_height * 0.5) * picker->step_y;
 	picker->draw_y = 0;
+	picker->lod_counter = 0;
 }
 
 static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)

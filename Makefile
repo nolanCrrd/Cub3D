@@ -87,7 +87,7 @@ CFLAGS = -Wall -Werror -Wextra -g \
 		-I libft/ft_printf/includes \
 		-I libft/get_next_line/ \
 		-I $(MLX_DIR)includes \
-		-O3
+		-Ofast
 
 LDFLAGS = $(LIBFT) -lm $(MLX_DIR)libmlx.so -lSDL2
 

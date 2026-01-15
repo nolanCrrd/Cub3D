@@ -50,10 +50,6 @@ void	load_rec(t_ctx *ctx)
 
 void	display_rec(t_ctx *ctx)
 {
-	int	tmp_pos[2];
-
-	tmp_pos[X] = REC_X;
-	tmp_pos[Y] = REC_Y;
 	if (!ctx->rec)
 		return ;
 	if ((((size_t)ctx->frame * 10000) / 1000000) % 20 >= 15)
