@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 13:07:01 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 13:07:05 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RENDER_H
 # define RENDER_H
 
@@ -9,10 +21,10 @@
 # define REC_X 1500
 # define REC_Y 100
 
-#include "ctx.h"
+# include "ctx.h"
 
-int	render_cub3d(t_ctx *ctx);
-void update(void *ptr);
+int		render_cub3d(t_ctx *ctx);
+void	update(void *ptr);
 
 //hooks
 void	close_hook(int event, void *ptr);
@@ -44,7 +56,7 @@ typedef struct s_ray
 	int		number;
 }	t_ray;
 
-typedef struct	s_wall_picker
+typedef struct s_wall_picker
 {
 	t_texture	*texture;
 	double		wall_x;
@@ -57,11 +69,11 @@ typedef struct	s_wall_picker
 	int			lod_counter;
 }	t_wall_picker;
 
-typedef struct	s_floor_picker
+typedef struct s_floor_picker
 {
 	float	floor_step[2];
 	float	floor[2];
-	float	posZ;
+	float	pos_z;
 	float	raw_distance;
 	int		cell[2];
 	int		current[2];

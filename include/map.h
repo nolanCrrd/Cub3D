@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/15 13:06:57 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/15 13:07:05 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_H
 # define MAP_H
 # include <stddef.h>
 # include "mlx.h"
 
-#define	X 0
-#define Y 1
+# define X 0
+# define Y 1
 
 typedef enum e_map_object
 {
@@ -14,7 +26,7 @@ typedef enum e_map_object
 	SOUTH,
 	EAST,
 	WEST
-}	s_map_object;
+}	t_map_object;
 
 typedef struct s_texture
 {

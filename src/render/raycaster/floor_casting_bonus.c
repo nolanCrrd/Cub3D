@@ -25,7 +25,7 @@
 static void	init_y_picker(t_floor_picker *picker, t_ray *ray, t_ctx *ctx)
 {
 	picker->p = picker->current[Y] - WIN_H * 0.5;
-	picker->raw_distance = picker->posZ / picker->p;
+	picker->raw_distance = picker->pos_z / picker->p;
 	picker->floor_step[X] = picker->raw_distance * (
 			ray->ray_dir1[X] - ray->ray_dir0[X]) / WIN_W;
 	picker->floor_step[Y] = picker->raw_distance * (
@@ -116,7 +116,7 @@ void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 	ray->ray_dir0[Y] = ctx->player->dir_vec[Y] - ctx->player->plane[Y];
 	ray->ray_dir1[X] = ctx->player->dir_vec[X] + ctx->player->plane[X];
 	ray->ray_dir1[Y] = ctx->player->dir_vec[Y] + ctx->player->plane[Y];
-	picker.posZ = 0.5 * WIN_H;
+	picker.pos_z = 0.5 * WIN_H;
 	while (picker.current[Y] < WIN_H)
 	{
 		init_y_picker(&picker, ray, ctx);
