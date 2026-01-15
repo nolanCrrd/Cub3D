@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:39:27 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 10:39:49 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:41:30 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,13 @@ int	check_file(t_map *map)
 	{
 		perror("cub3D");
 		free(already_seen);
+		finish_get_next_line(fd);
 		close(fd);
 		return (1);
 	}
 	err_code = check_textures(fd, already_seen) || check_map(fd, map);
+	if (err_code)
+		finish_get_next_line(fd);
 	free(already_seen);
 	close(fd);
 	return (err_code);

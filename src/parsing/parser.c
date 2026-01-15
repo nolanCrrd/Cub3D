@@ -6,7 +6,7 @@
 /*   By: ehode <ehode@student.42angouleme.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 15:31:26 by ehode             #+#    #+#             */
-/*   Updated: 2026/01/15 10:47:30 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:40:24 by ehode            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "ft_printf.h"
 #include "ctx.h"
 #include "ft_printf/includes/ft_printf.h"
+#include "utils.h"
 #include "parsing.h"
 #include "map.h"
 #include "libft.h"
 #include <fcntl.h>
-#include <stdio.h>
 
 int	check_file_extension(t_map *map)
 {
@@ -66,6 +66,7 @@ t_ctx	*parse(char *file_path)
 	if (init_textures(fd, ctx) || init_map(fd, ctx->map)
 		|| init_player(ctx->map, ctx->player) || is_valid_map(ctx->map))
 	{
+		finish_get_next_line(fd);
 		close(fd);
 		destroy_ctx(&ctx);
 		return (NULL);

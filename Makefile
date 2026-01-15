@@ -52,7 +52,8 @@ SRCS_UTILS = $(SRC_DIR)utils/is_blank.c \
 	$(SRC_DIR)utils/get_distance.c \
 	$(SRC_DIR)utils/draw_square.c \
 	$(SRC_DIR)utils/get_near_elmt.c \
-	$(SRC_DIR)utils/get_tile.c
+	$(SRC_DIR)utils/get_tile.c \
+	$(SRC_DIR)utils/finish_gnl.c
 
 SRCS_HUD_BONUS = $(SRC_DIR)render/hud/map_bonus.c \
 	$(SRC_DIR)render/hud/rec_bonus.c
