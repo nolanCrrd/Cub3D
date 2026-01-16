@@ -14,7 +14,7 @@
 # define PLAYER_H
 
 # define P_M_SPEED 1.5
-# define P_R_SPEED 1.5
+# define P_R_SPEED 2
 
 typedef struct s_player
 {

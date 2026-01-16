@@ -95,7 +95,10 @@ void	all_keydown_hooks(int key, void *ptr)
 	rotate_player(key, ctx);
 	open_door(key, ctx);
 	if (key == KEY_ESC)
+	{
+		ctx->player->is_dead = 1;
 		mlx_loop_end(ctx->mlx);
+	}
 	if (key == KEY_PLUS)
 		ctx->lod_value++;
 	if (key == KEY_MINUS)

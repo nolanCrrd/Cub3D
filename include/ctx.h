@@ -17,6 +17,17 @@
 # include "mlx.h"
 # include "map.h"
 # include "player.h"
+#include <bits/pthreadtypes.h>
+
+typedef struct	s_raycaster_thread
+{
+	mlx_color	*pixels;
+	double		*z_buffer;
+	int			x_start;
+	int			x_end;
+	int			x_len;
+	int			thread_number;
+}	t_raycaster_thread;
 
 typedef struct s_ctx
 {
@@ -31,6 +42,9 @@ typedef struct s_ctx
 	double		frame_time;
 	int			lod_value;
 	mlx_image	*rec;
+	t_raycaster_thread	thread_info[4];
+	pthread_mutex_t		thread_working[4];
+
 }	t_ctx;
 
 t_ctx	*init_ctx(char *file_path);

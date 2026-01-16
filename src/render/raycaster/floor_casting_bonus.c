@@ -79,21 +79,26 @@ static void	init_x_picker(t_floor_picker *picker, t_ctx *ctx)
 static void	lod_loop(t_floor_picker *picker, int lod,
 	mlx_color *pixels, t_ctx *ctx)
 {
+	mlx_color	tmp;
+	mlx_color	tmp2;
+
+	tmp = mlx_get_image_pixel(ctx->mlx,
+					ctx->map->textures->floor_tex->texture,
+					picker->floor_tex[X], picker->floor_tex[Y]);
+	tmp2 = mlx_get_image_pixel(ctx->mlx,
+					ctx->map->textures->ceiling_tex->texture,
+					picker->ceil_tex[X], picker->ceil_tex[Y]);
 	while (picker->lod_counter < lod)
 	{
 		if (WIN_W * (picker->current[Y] + picker->lod_counter)
 			+ picker->current[X] < WIN_H * WIN_W)
 			pixels[WIN_W * (picker->current[Y] + picker->lod_counter)
-				+ picker->current[X]] = mlx_get_image_pixel(ctx->mlx,
-					ctx->map->textures->floor_tex->texture,
-					picker->floor_tex[X], picker->floor_tex[Y]);
+				+ picker->current[X]] = tmp;
 		if (WIN_W * (WIN_H - picker->current[Y] - 1 + picker->lod_counter)
 			+ picker->current[X] < WIN_H * WIN_W)
 			pixels[WIN_W * (WIN_H - picker->current[Y] - 1
 					+ picker->lod_counter) + picker->current[X]]
-				= mlx_get_image_pixel(ctx->mlx,
-					ctx->map->textures->ceiling_tex->texture,
-					picker->ceil_tex[X], picker->ceil_tex[Y]);
+				= tmp2;
 		picker->lod_counter++;
 	}
 }

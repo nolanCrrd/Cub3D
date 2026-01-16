@@ -25,15 +25,15 @@ void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx)
 	inv_det = 1 / (ctx->player->plane[X] * ctx->player->dir_vec[Y] - ctx->player->dir_vec[X] * ctx->player->plane[Y]);
 	transform[X] = inv_det * (ctx->player->dir_vec[Y] * sprite[X] - ctx->player->dir_vec[X] * sprite[Y]);
 	transform[Y] = inv_det * (-ctx->player->plane[Y] * sprite[X] + ctx->player->plane[X] * sprite[Y]);
-	sprite_screen_x = (WIN_W * 0.5) * (1 + transform[X] / transform[Y]);
+	sprite_screen_x = (WIN_W >> 1) * (1 + transform[X] / transform[Y]);
 	
 	sprite_width = abs((int)(WIN_H / (transform[Y]) * E_SCALE));
-	if (sprite_screen_x < 0 - sprite_width * 0.5|| sprite_screen_x > WIN_W + sprite_width * 0.5)
+	if (sprite_screen_x < 0 - (sprite_width >> 1) || sprite_screen_x > WIN_W + (sprite_width >> 1))
 		return ;
 
-	floor_y = WIN_H * 0.5 + (WIN_H / transform[Y]) * 0.5;
-	draw_x[0] = -sprite_width * 0.5 + sprite_screen_x;
-	draw_x[1] = sprite_width * 0.5 + sprite_screen_x;
+	floor_y = (WIN_H >> 1) + (WIN_H / transform[Y]) * 0.5;
+	draw_x[0] = (-sprite_width >> 1) + sprite_screen_x;
+	draw_x[1] = (sprite_width >> 1) + sprite_screen_x;
 
 	sprite_height = abs((int)(WIN_H / transform[Y] * E_SCALE));
 	draw_y[0] = floor_y - sprite_height;
@@ -44,7 +44,7 @@ void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx)
 	{
 		tex[X] = (int)(
 			256 * (draw_x[2] - draw_x[0]) * ctx->map->textures->ennemy->width
-			/ sprite_width) / 256;
+			/ sprite_width) >> 8;
 		if(transform[Y] > 0 && draw_x[2] > 0 && draw_x[2] < WIN_W && transform[Y] < z_buffer[draw_x[2]])
 		{
 			draw_y[2] = draw_y[0];
@@ -53,13 +53,13 @@ void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx)
 				d = draw_y[2] - (draw_y[0]);
 				tex[Y] = d * ctx->map->textures->ennemy->height / sprite_height;
 				lod_counter = 0;
+				tmp = (
+					mlx_get_image_pixel(ctx->mlx, ctx->map->textures->ennemy->texture, tex[X], tex[Y])
+				);
 				while (lod_counter < lod) 
 				{
-					tmp = (
-						mlx_get_image_pixel(ctx->mlx, ctx->map->textures->ennemy->texture, tex[X], tex[Y])
-					);
 					if (tmp.rgba != 0x000000FF && draw_y[2] * WIN_W + draw_x[2] + lod_counter < WIN_W * WIN_H
-						&& draw_y[2] * WIN_W + draw_x[2] + lod_counter > 0)
+						&& draw_y[2] * WIN_W + draw_x[2] + lod_counter)
 						pixels[draw_y[2] * WIN_W + draw_x[2] + lod_counter].rgba = tmp.rgba;
 					lod_counter++;
 				}

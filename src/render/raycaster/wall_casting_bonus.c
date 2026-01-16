@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include "render.h"
 #include "math.h"
+#include <stdio.h>
 
 /**
  * @brief Return the correct texture based on the direction that the wall was hit
@@ -47,7 +48,7 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 {
 	picker->line_height = (int)(WIN_H / ray->perp_dist);
-	picker->start = -picker->line_height * 0.5 + WIN_H * 0.5;
+	picker->start = (-picker->line_height >> 1) + (WIN_H >> 1);
 	picker->texture = get_correct_texture(ray, ctx);
 	if (ray->side_hit == 0)
 		picker->wall_x = ctx->player->pos[Y] + ray->perp_dist * ray->ray_dir[Y];
@@ -61,7 +62,7 @@ static void	picker_init(t_wall_picker *picker, t_ray *ray, t_ctx *ctx)
 		picker->tex[X] = picker->texture->width - picker->tex[X] - 1;
 	picker->step_y = 1.0 * picker->texture->height / picker->line_height;
 	picker->tex_pos = ((picker->start >= 0) * picker->start
-			- WIN_H * 0.5 + picker->line_height * 0.5) * picker->step_y;
+			- (WIN_H >> 1) + (picker->line_height >> 1)) * picker->step_y;
 	picker->start = picker->start * (picker->start >= 0);
 	picker->draw_y = picker->start;
 	if (picker->line_height > WIN_H)
@@ -99,6 +100,7 @@ static void	darker_color(t_wall_picker picker, t_ray *ray, mlx_color *pixels)
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 {
 	t_wall_picker	picker;
+	mlx_color		tmp;
 
 	picker_init(&picker, ray, ctx);
 	while (picker.draw_y < picker.start + picker.line_height)
@@ -106,11 +108,12 @@ void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx)
 		picker.tex[Y] = fmin((int)picker.tex_pos, picker.texture->height - 1);
 		picker.tex_pos += picker.step_y;
 		picker.lod_counter = 0;
+		tmp = mlx_get_image_pixel(ctx->mlx,
+				picker.texture->texture, picker.tex[X], picker.tex[Y]);
 		while (picker.lod_counter < lod)
 		{
 			pixels[picker.draw_y * WIN_W + ray->number + picker.lod_counter]
-				= mlx_get_image_pixel(ctx->mlx,
-					picker.texture->texture, picker.tex[X], picker.tex[Y]);
+				= tmp;
 			darker_color(picker, ray, pixels);
 			picker.lod_counter++;
 		}

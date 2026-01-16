@@ -13,6 +13,7 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+#include "mlx.h"
 # define WIN_W 1920
 # define WIN_H 1080
 # define MAP_SIZE 10
@@ -88,5 +89,16 @@ void	raycaster(int lod, t_ctx *ctx);
 void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx);
+
+// multi thread
+
+void	thread_routine1(void *ptr);
+void	thread_routine2(void *ptr);
+void	thread_routine3(void *ptr);
+void	thread_routine4(void *ptr);
+void	raycaster_thread(int lod, t_raycaster_thread *thread_info, t_ctx *ctx);
+void	ennemy_casting_thread(double *z_buffer, int lod, t_raycaster_thread *thread_info, t_ctx *ctx);
+void	put_vert_pixels_thread(t_ray *ray, int lod, t_raycaster_thread *thread_info, t_ctx *ctx);
+void	put_f_c_pixels_thread(t_ray *ray, int lod, t_raycaster_thread *thread_info, t_ctx *ctx);
 
 #endif

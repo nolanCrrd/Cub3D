@@ -25,5 +25,8 @@ void	close_hook(int event, void *ptr)
 
 	ctx = (t_ctx *)ptr;
 	if (event == 0)
+	{
+		ctx->player->is_dead = 1;
 		mlx_loop_end(ctx->mlx);
+	}
 }

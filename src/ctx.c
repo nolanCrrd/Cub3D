@@ -16,6 +16,8 @@
 #include "libft.h"
 #include "map.h"
 #include "mlx.h"
+#include "render.h"
+#include <pthread.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,8 +94,32 @@ void	destroy_ctx(t_ctx **ctx)
 	free((*ctx)->ennemy);
 	destroy_rec(*ctx);
 	mlx_destroy_context((*ctx)->mlx);
+	pthread_mutex_destroy(&(*ctx)->thread_working[0]);
+	pthread_mutex_destroy(&(*ctx)->thread_working[1]);
+	pthread_mutex_destroy(&(*ctx)->thread_working[2]);
+	pthread_mutex_destroy(&(*ctx)->thread_working[3]);
 	free((*ctx));
 	*ctx = NULL;
+}
+
+static void	init_threads_infos(t_ctx *ctx)
+{
+	static mlx_color	pixels[WIN_W * WIN_H];
+	static double		z_buffer[WIN_W];
+	int					i;
+
+	i = 0;
+	while (i < 4)
+	{
+		ctx->thread_info[i].pixels = pixels;
+		ctx->thread_info[i].z_buffer = z_buffer;
+		ctx->thread_info[i].x_start = WIN_W / 4 * i;
+		ctx->thread_info[i].x_end = WIN_W / 4 * (i + 1);
+		ctx->thread_info[i].x_len = ctx->thread_info[i].x_end - ctx->thread_info[i].x_start;
+		ctx->thread_info[i].thread_number = i + 1;
+		pthread_mutex_init(&ctx->thread_working[i], NULL);
+		i++;
+	}
 }
 
 t_ctx	*init_ctx(char *file_path)
@@ -118,7 +144,8 @@ t_ctx	*init_ctx(char *file_path)
 		return (NULL);
 	}
 	ctx->map->file_path = file_path;
+	init_threads_infos(ctx);
 	ctx->mlx = mlx_init();
-	ctx->lod_value = 3;
+	ctx->lod_value = 4;
 	return (ctx);
 }

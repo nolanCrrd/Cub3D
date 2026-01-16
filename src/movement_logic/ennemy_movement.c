@@ -1,7 +1,6 @@
 #include "ctx.h"
 #include "libft.h"
 #include <math.h>
-#include <stdio.h>
 
 void	ennemy_move(t_ctx *ctx)
 {
@@ -14,15 +13,13 @@ void	ennemy_move(t_ctx *ctx)
 	direction[X] = ctx->player->pos[X] - ctx->ennemy->pos[X];
 	direction[Y] = ctx->player->pos[Y] - ctx->ennemy->pos[Y];
 	distance = sqrt(direction[X] * direction[X] + direction[Y] * direction[Y]);
-	if (distance <= 0.2)
+	if (distance <= 0.4)
 	{
 		ctx->player->is_dead = 1;
 		return ;
 	}
 	direction[X] /= distance;
 	direction[Y] /= distance;
-	printf("%f;%f\n", direction[X], direction[Y]);
-
 	if (ft_strchr(walkable, ctx->map->grid[(int)ctx->ennemy->pos[Y]][
 			(int)(ctx->ennemy->pos[X] + direction[X] * m_s)]))
 		ctx->ennemy->pos[X] += direction[X] * m_s;
