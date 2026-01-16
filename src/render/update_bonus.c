@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:05:17 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/16 15:50:33 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:57:51 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,15 @@ void	update(void *ptr)
 	ctx = (t_ctx *)ptr;
 	if (ctx->player->is_dead)
 	{
-		printf("mort\n");
-		mlx_loop_end(ctx->mlx);
+		mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){
+			.rgba=0x000000ff
+		});
+		mlx_set_font_scale(ctx->mlx, "default", 30);
+		mlx_string_put(
+			ctx->mlx, ctx->win, WIN_W / 2 - 200, WIN_H / 2 - 200,
+			(mlx_color){.rgba = 0xff0000ff}, "You'r dead !"
+		);
+		return ;
 	}
 	refresh_frame_time(ctx);
 	player_mouse_rotate(ctx);
