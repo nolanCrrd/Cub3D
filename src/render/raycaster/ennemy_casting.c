@@ -43,7 +43,7 @@ void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx)
 	while (draw_x[2] < draw_x[1])
 	{
 		tex[X] = (int)(
-			256 * (draw_x[2] - draw_x[0]) * ctx->map->textures->ennemy->width
+			256 * (draw_x[2] - draw_x[0]) * ctx->textures->ennemy->width
 			/ sprite_width) >> 8;
 		if(transform[Y] > 0 && draw_x[2] > 0 && draw_x[2] < WIN_W && transform[Y] < z_buffer[draw_x[2]])
 		{
@@ -51,10 +51,10 @@ void	ennemy_casting(double *z_buffer, int lod, mlx_color *pixels, t_ctx *ctx)
 			while (draw_y[2] < draw_y[1])
 			{
 				d = draw_y[2] - (draw_y[0]);
-				tex[Y] = d * ctx->map->textures->ennemy->height / sprite_height;
+				tex[Y] = d * ctx->textures->ennemy->height / sprite_height;
 				lod_counter = 0;
 				tmp = (
-					mlx_get_image_pixel(ctx->mlx, ctx->map->textures->ennemy->texture, tex[X], tex[Y])
+					mlx_get_image_pixel(ctx->mlx, ctx->textures->ennemy->texture, tex[X], tex[Y])
 				);
 				while (lod_counter < lod) 
 				{

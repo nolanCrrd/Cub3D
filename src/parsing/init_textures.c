@@ -124,10 +124,10 @@ static int	fill_all(char *line, t_ctx *ctx)
 {
 	int	err_text_code;
 
-	err_text_code = fill_texture(line, ctx->mlx, ctx->map->textures);
+	err_text_code = fill_texture(line, ctx->mlx, ctx->textures);
 	if (err_text_code == 1)
 	{
-		if (fill_color(line, ctx->map->textures))
+		if (fill_color(line, ctx->textures))
 		{
 			free(line);
 			ft_dprintf(2, "cub3D: Color not respect rgb format\n");
@@ -155,8 +155,8 @@ int	init_textures(int fd, t_ctx *ctx)
 	char		*line;
 	int			loaded_texture;
 
-	ctx->map->textures = ft_calloc(1, sizeof(t_textures));
-	if (ctx->map->textures == NULL)
+	ctx->textures = ft_calloc(1, sizeof(t_textures));
+	if (ctx->textures == NULL)
 	{
 		perror("cub3D");
 		return (1);

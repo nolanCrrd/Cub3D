@@ -65,7 +65,7 @@ void	destroy_textures(t_textures **textures, t_ctx *ctx)
 	*textures = NULL;
 }
 
-void	destroy_map(t_map **map, t_ctx *ctx)
+void	destroy_map(t_map **map)
 {
 	size_t	current_y;
 
@@ -76,8 +76,6 @@ void	destroy_map(t_map **map, t_ctx *ctx)
 			free((*map)->grid[current_y++]);
 		free((*map)->grid);
 	}
-	if ((*map)->textures)
-		destroy_textures(&(*map)->textures, ctx);
 	free(*map);
 	*map = NULL;
 }
@@ -85,11 +83,13 @@ void	destroy_map(t_map **map, t_ctx *ctx)
 void	destroy_ctx(t_ctx **ctx)
 {
 	if ((*ctx)->map)
-		destroy_map(&(*ctx)->map, *ctx);
+		destroy_map(&(*ctx)->map);
 	if ((*ctx)->render)
 		mlx_destroy_image((*ctx)->mlx, (*ctx)->render);
 	if ((*ctx)->win)
 		mlx_destroy_window((*ctx)->mlx, (*ctx)->win);
+	if ((*ctx)->textures)
+		destroy_textures(&(*ctx)->textures, *ctx);
 	free((*ctx)->player);
 	free((*ctx)->ennemy);
 	destroy_rec(*ctx);

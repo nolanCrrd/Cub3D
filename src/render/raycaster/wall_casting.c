@@ -25,12 +25,12 @@ static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 	if (ray->side_hit == 1)
 	{
 		if (ray->ray_dir[Y] > 0 && ray->ray_dir[Y] != 1e30)
-			return (ctx->map->textures->north);
-		return (ctx->map->textures->south);
+			return (ctx->textures->north);
+		return (ctx->textures->south);
 	}
 	if (ray->ray_dir[X] > 0 && ray->ray_dir[X] != 1e30)
-		return (ctx->map->textures->west);
-	return (ctx->map->textures->east);
+		return (ctx->textures->west);
+	return (ctx->textures->east);
 }
 
 /**
@@ -100,7 +100,7 @@ void	put_vert_pixels(t_ray *ray, int raynumber,
 	{
 		if (picker.draw_y < picker.start)
 			pixels[picker.draw_y * WIN_W + raynumber] = (mlx_color){
-				.rgba = ctx->map->textures->ceiling->rgba};
+				.rgba = ctx->textures->ceiling->rgba};
 		else if (picker.draw_y < picker.start + picker.line_height)
 		{
 			picker.tex[Y] = fmin((int)picker.tex_pos, picker
@@ -113,7 +113,7 @@ void	put_vert_pixels(t_ray *ray, int raynumber,
 		}
 		else
 			pixels[picker.draw_y * WIN_W + raynumber]
-				= (mlx_color){.rgba = ctx->map->textures->floor->rgba};
+				= (mlx_color){.rgba = ctx->textures->floor->rgba};
 		picker.draw_y++;
 	}
 }

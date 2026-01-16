@@ -42,6 +42,7 @@ typedef struct s_ctx
 	double		frame_time;
 	int			lod_value;
 	mlx_image	*rec;
+	t_textures	*textures;
 	t_raycaster_thread	thread_info[4];
 	pthread_mutex_t		thread_working[4];
 

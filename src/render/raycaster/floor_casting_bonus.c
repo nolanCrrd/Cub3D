@@ -48,21 +48,21 @@ static void	init_x_picker(t_floor_picker *picker, t_ctx *ctx)
 	picker->cell[X] = picker->floor[X];
 	picker->cell[Y] = picker->floor[Y];
 	picker->floor_tex[X] = fmin(
-			(ctx->map->textures->floor_tex->width * (
+			(ctx->textures->floor_tex->width * (
 					picker->floor[X] - picker->cell[X])), (
-				ctx->map->textures->floor_tex->width - 1));
+				ctx->textures->floor_tex->width - 1));
 	picker->floor_tex[Y] = fmin(
-			(ctx->map->textures->floor_tex->height * (
+			(ctx->textures->floor_tex->height * (
 					picker->floor[Y] - picker->cell[Y])), (
-				ctx->map->textures->floor_tex->height - 1));
+				ctx->textures->floor_tex->height - 1));
 	picker->ceil_tex[X] = fmin(
-			(ctx->map->textures->ceiling_tex->width * (
+			(ctx->textures->ceiling_tex->width * (
 					picker->floor[X] - picker->cell[X])), (
-				ctx->map->textures->ceiling_tex->width - 1));
+				ctx->textures->ceiling_tex->width - 1));
 	picker->ceil_tex[Y] = fmin(
-			(ctx->map->textures->ceiling_tex->height * (
+			(ctx->textures->ceiling_tex->height * (
 					picker->floor[Y] - picker->cell[Y])), (
-				ctx->map->textures->ceiling_tex->height - 1));
+				ctx->textures->ceiling_tex->height - 1));
 	picker->floor[X] += picker->floor_step[X];
 	picker->floor[Y] += picker->floor_step[Y];
 	picker->lod_counter = 0;
@@ -83,10 +83,10 @@ static void	lod_loop(t_floor_picker *picker, int lod,
 	mlx_color	tmp2;
 
 	tmp = mlx_get_image_pixel(ctx->mlx,
-					ctx->map->textures->floor_tex->texture,
+					ctx->textures->floor_tex->texture,
 					picker->floor_tex[X], picker->floor_tex[Y]);
 	tmp2 = mlx_get_image_pixel(ctx->mlx,
-					ctx->map->textures->ceiling_tex->texture,
+					ctx->textures->ceiling_tex->texture,
 					picker->ceil_tex[X], picker->ceil_tex[Y]);
 	while (picker->lod_counter < lod)
 	{

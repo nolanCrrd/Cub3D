@@ -52,7 +52,6 @@ typedef struct s_textures
 typedef struct s_map
 {
 	char		*file_path;
-	t_textures	*textures;
 	char		**grid;
 	size_t		size_x;
 	size_t		size_y;

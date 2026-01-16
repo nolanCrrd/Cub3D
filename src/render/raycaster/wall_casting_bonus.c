@@ -26,16 +26,16 @@
 static t_texture	*get_correct_texture(t_ray *ray, t_ctx *ctx)
 {
 	if (ctx->map->grid[ray->map[Y]][ray->map[X]] == 'D')
-		return (ctx->map->textures->door);
+		return (ctx->textures->door);
 	if (ray->side_hit == 1)
 	{
 		if (ray->ray_dir[Y] > 0 && ray->ray_dir[Y] != 1e30)
-			return (ctx->map->textures->north);
-		return (ctx->map->textures->south);
+			return (ctx->textures->north);
+		return (ctx->textures->south);
 	}
 	if (ray->ray_dir[X] > 0 && ray->ray_dir[X] != 1e30)
-		return (ctx->map->textures->west);
-	return (ctx->map->textures->east);
+		return (ctx->textures->west);
+	return (ctx->textures->east);
 }
 
 /**
