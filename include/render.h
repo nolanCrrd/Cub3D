@@ -85,6 +85,21 @@ typedef struct s_floor_picker
 	int		lod_counter;
 }	t_floor_picker;
 
+typedef struct s_ennemy_picker
+{
+	double		sprite[2];
+	double		transform[2];
+	double		inv_det;
+	int			sprite_screen_x;
+	int			sprite_height;
+	int			sprite_width;
+	int			draw_y[3];
+	int			draw_x[3];
+	int			tex[2];
+	int			d;
+	int			floor_y;
+}	t_ennemy_picker;
+
 void	raycaster(int lod, t_ctx *ctx);
 void	put_f_c_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);
 void	put_vert_pixels(t_ray *ray, int lod, mlx_color *pixels, t_ctx *ctx);

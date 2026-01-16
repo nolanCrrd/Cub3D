@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:05:17 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 11:05:50 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:50:33 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,24 @@ static int	as_moved(t_player *player)
 	);
 }
 
+static void	display_hud(t_ctx *ctx)
+{
+	char	*fps;
+
+	display_map(ctx);
+	display_rec(ctx);
+	if (ctx->frame_time > 0)
+	{
+		fps = ft_itoa(1000 / ctx->frame_time);
+		mlx_string_put(ctx->mlx, ctx->win, 20, 35,
+			(mlx_color){.rgba = 0xA10000ff}, fps);
+		free(fps);
+	}
+}
+
 void	update(void *ptr)
 {
 	t_ctx	*ctx;
-	char	*fps;
 
 	ctx = (t_ctx *)ptr;
 	if (ctx->player->is_dead)
@@ -61,14 +75,6 @@ void	update(void *ptr)
 		raycaster(1, ctx);
 	mlx_clear_window(ctx->mlx, ctx->win, (mlx_color){.rgba = 0});
 	mlx_put_image_to_window(ctx->mlx, ctx->win, ctx->render, 0, 0);
-	display_map(ctx);
-	display_rec(ctx);
-	if (ctx->frame_time > 0)
-	{
-		fps = ft_itoa(1000 / ctx->frame_time);
-		mlx_string_put(ctx->mlx, ctx->win, 20, 35,
-			(mlx_color){.rgba = 0xA10000ff}, fps);
-		free(fps);
-	}
+	display_hud(ctx);
 	render_door_text(ctx);
 }

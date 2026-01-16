@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 10:55:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 10:55:37 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:50:58 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ static void	lod_loop(t_floor_picker *picker, int lod,
 	mlx_color	tmp2;
 
 	tmp = mlx_get_image_pixel(ctx->mlx,
-					ctx->textures->floor_tex->texture,
-					picker->floor_tex[X], picker->floor_tex[Y]);
+			ctx->textures->floor_tex->texture,
+			picker->floor_tex[X], picker->floor_tex[Y]);
 	tmp2 = mlx_get_image_pixel(ctx->mlx,
-					ctx->textures->ceiling_tex->texture,
-					picker->ceil_tex[X], picker->ceil_tex[Y]);
+			ctx->textures->ceiling_tex->texture,
+			picker->ceil_tex[X], picker->ceil_tex[Y]);
 	while (picker->lod_counter < lod)
 	{
 		if (WIN_W * (picker->current[Y] + picker->lod_counter)

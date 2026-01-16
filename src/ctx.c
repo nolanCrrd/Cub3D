@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 11:05:47 by ncorrear          #+#    #+#             */
-/*   Updated: 2026/01/15 11:05:50 by ncorrear         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:52:00 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ static void	init_threads_infos(t_ctx *ctx)
 		ctx->thread_info[i].z_buffer = z_buffer;
 		ctx->thread_info[i].x_start = WIN_W / 4 * i;
 		ctx->thread_info[i].x_end = WIN_W / 4 * (i + 1);
-		ctx->thread_info[i].x_len = ctx->thread_info[i].x_end - ctx->thread_info[i].x_start;
+		ctx->thread_info[i].x_len = ctx->thread_info[i].x_end
+			- ctx->thread_info[i].x_start;
 		ctx->thread_info[i].thread_number = i + 1;
 		pthread_mutex_init(&ctx->thread_working[i], NULL);
 		i++;

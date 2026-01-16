@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ennemy_movement.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 15:48:32 by ncorrear          #+#    #+#             */
+/*   Updated: 2026/01/16 15:51:27 by ncorrear         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ctx.h"
 #include "libft.h"
 #include <math.h>
 
 void	ennemy_move(t_ctx *ctx)
 {
-	const char *walkable = "0OM";
-	double	distance;
-	double	direction[2];
-	double	m_s;
+	const char	*walkable = "0OM";
+	double		distance;
+	double		direction[2];
+	double		m_s;
 
 	m_s = ctx->frame_time / 1000.0 * E_M_SPEED;
 	direction[X] = ctx->player->pos[X] - ctx->ennemy->pos[X];
@@ -23,7 +35,7 @@ void	ennemy_move(t_ctx *ctx)
 	if (ft_strchr(walkable, ctx->map->grid[(int)ctx->ennemy->pos[Y]][
 			(int)(ctx->ennemy->pos[X] + direction[X] * m_s)]))
 		ctx->ennemy->pos[X] += direction[X] * m_s;
-	if (ft_strchr(walkable, ctx->map->grid[(int)(ctx->ennemy->pos[Y] + direction[Y]
-			   * m_s)][(int)(ctx->ennemy->pos[X])]))
+	if (ft_strchr(walkable, ctx->map->grid[(int)(ctx->ennemy->pos[Y]
+				+ direction[Y] * m_s)][(int)(ctx->ennemy->pos[X])]))
 		ctx->ennemy->pos[Y] += direction[Y] * m_s;
 }
